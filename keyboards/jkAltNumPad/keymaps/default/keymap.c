@@ -1,52 +1,62 @@
 #include "kb.h"
 
+// keymap and RGB light per layer from: 
+// https://github.com/AGausmann/qmk_firmware/blob/agausmann-v3.x/keyboards/nyquist/keymaps/agausmann/keymap.c
+
+/*#ifdef RGBLIGHT_ENABLE
+#include "rgblight.h"
+#endif*/
+
 #define LAYER_NUMPAD 0
 #define LAYER_NUMBERS 1
 #define LAYER_CONSOLE 2
 #define LAYER_NAV_CLUSTER 3
 #define LAYER_SETUP 4
 
+#define _______ KC_TRNS
+#define xxxxxxx KC_NO
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[LAYER_NUMPAD] = KEYMAP(
-		TO(2), TO(3), TO(1), KC_LALT, 
-		KC_BSPC, KC_PSLS, KC_PAST, KC_PMNS, 
-		KC_P7, KC_P8, KC_P9, 
-		KC_P4, KC_P5, KC_P6, KC_PPLS, 
-		KC_P1, KC_P2, KC_P3, 
-		KC_P0, KC_PDOT, KC_PENT),
+		TO(2),  	TO(3), 		TO(1), 		KC_LALT, 
+		KC_BSPC, 	KC_PSLS, 	KC_PAST, 	KC_PMNS, 
+		KC_P7,  	KC_P8, 		KC_P9, 
+		KC_P4,  	KC_P5, 		KC_P6, 		KC_PPLS, 
+		KC_P1,  	KC_P2, 		KC_P3, 
+		KC_P0,  	KC_PDOT, 	KC_PENT),
 
 	[LAYER_NUMBERS] = KEYMAP(
-		KC_TRNS, KC_TRNS, KC_TRNS, TO(0), 
-		KC_TRNS, KC_SLSH, LSFT(KC_8), KC_MINS, 
-		KC_7, KC_8, KC_9, 
-		KC_4, KC_5, KC_6, LSFT(KC_EQL), 
-		KC_1, KC_2, KC_3, 
-		KC_0, KC_DOT, KC_ENT),
+		_______, 	_______, 	_______, 	TO(0), 
+		_______, 	KC_SLSH, 	LSFT(KC_8), 	KC_MINS, 
+		KC_7, 		KC_8, 		KC_9, 
+		KC_4, 		KC_5, 		KC_6, 		LSFT(KC_EQL), 
+		KC_1,		KC_2, 		KC_3, 
+		KC_0, 		KC_DOT, 	KC_ENT),
 
 	[LAYER_CONSOLE] = KEYMAP(
-		KC_TRNS, KC_TRNS, KC_TRNS, TO(0), 
-		KC_INS, KC_HOME, KC_PGUP, KC_SLSH, 
-		KC_DEL, KC_END, KC_PGDN, 
-		KC_NO, KC_UP, KC_NO, KC_RGUI, 
-		KC_LEFT, KC_DOWN, KC_RGHT, 
-		KC_LCTL, KC_LSFT, KC_ENT),
+		_______,	_______, 	_______, 	TO(0), 
+		KC_INS, 	KC_HOME, 	KC_PGUP, 	KC_SLSH, 
+		KC_DEL, 	KC_END, 	KC_PGDN, 
+		KC_NO, 		KC_UP, 		KC_NO, 		KC_RGUI, 
+		KC_LEFT, 	KC_DOWN, 	KC_RGHT, 
+		KC_LCTL, 	KC_LSFT, 	KC_ENT),
 
 	[LAYER_NAV_CLUSTER] = KEYMAP(
-		KC_TRNS, MO(4), KC_TRNS, TO(0), 
-		KC_BSPC, M(3), M(0), M(4), 
-		KC_P7, KC_P8, KC_P9, 
-		KC_P4, KC_P5, KC_P6, M(5), 
-		KC_P1, KC_P2, KC_P3, 
-		KC_P0, M(2), KC_LALT),
+		_______, 	MO(4), 		_______, 	TO(0), 
+		KC_BSPC, 	M(3), 		M(0), 		M(4), 
+		KC_P7, 		KC_P8, 		KC_P9, 
+		KC_P4, 		KC_P5, 		KC_P6, 		M(5), 
+		KC_P1, 		KC_P2, 		KC_P3, 
+		KC_P0, 		M(2), 		KC_LALT),
 
 	[LAYER_SETUP] = KEYMAP(
-		KC_NO, KC_TRNS, KC_NO, RESET, 
-		KC_NO, KC_NO, KC_NO, KC_NO, 
-		KC_NO, KC_NO, KC_NO, 
-		RGB_HUI, RGB_SAI, RGB_VAI, KC_NO, 
-		RGB_HUD, RGB_SAD, RGB_VAD, 
-		RGB_TOG, RGB_MOD, RGB_MODE_PLAIN)
+		xxxxxxx, 	_______, 	xxxxxxx, 	RESET, 
+		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
+		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
+		RGB_HUI, 	RGB_SAI, 	RGB_VAI, 	xxxxxxx, 
+		RGB_HUD, 	RGB_SAD, 	RGB_VAD, 
+		RGB_TOG, 	RGB_MOD, 	RGB_MODE_PLAIN)
 
 };
 
@@ -83,43 +93,52 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	return MACRO_NONE;
 }
 
+void persistent_default_layer_set(uint16_t default_layer) {
+	eeconfig_update_default_layer(default_layer);
+	default_layer_set(default_layer);
+}
+
 void matrix_init_user(void) {
-  #ifdef RGBLIGHT_ENABLE
-
-  static uint8_t old_layer = 255;
-  uint8_t new_layer = biton32(layer_state);
-
-  if (old_layer != new_layer) {
-    switch (new_layer) {
-      case LAYER_NUMPAD:
-        rgblight_setrgb(0xFF, 0x94, 0x00);
-        break;
-      case LAYER_NUMBERS:
-        rgblight_setrgb(0x00, 0xF4, 0xFF);
-        break;
-      case LAYER_CONSOLE:
-        rgblight_setrgb(0xFF, 0x00, 0x66);
-        break;
-      case LAYER_NAV_CLUSTER:
-        rgblight_setrgb(0x90, 0x00, 0xFF);
-        break;
-      case LAYER_SETUP:
-        rgblight_setrgb(0xFF, 0x00, 0x00);
-        break;
-    }
-
-    old_layer = new_layer;
-  }
-
-  #endif //RGBLIGHT_ENABLE
+	rgblight_enable();
+	rgblight_setrgb(0x00, 0xFF, 0x00);
+	//static uint8_t old_layer = 25;
 }
 
 void matrix_scan_user(void) {
+	//return;
+	#ifdef RGBLIGHT_ENABLE
+	static uint8_t old_layer = 255;
+	static bool first_boot = true;
+	uint8_t new_layer = /*first_boot ? 0 :*/ biton32(layer_state);
+
+	if (/*first_boot ? true :*/ old_layer != new_layer) {
+		//rgblight_enable();
+  		switch (new_layer) {
+			case LAYER_NUMPAD:
+				rgblight_setrgb(0x00, 0x00, 0xFF);
+			break;
+			case LAYER_NUMBERS:
+				rgblight_setrgb(0x00, 0xF4, 0xFF);
+			break;
+			case LAYER_CONSOLE:
+				rgblight_setrgb(0xFF, 0x00, 0x66);
+			break;
+			case LAYER_NAV_CLUSTER:
+				rgblight_setrgb(0x90, 0x00, 0xFF);
+			break;
+			case LAYER_SETUP:
+				rgblight_setrgb(0xFF, 0x00, 0x00);
+			break;
+		}
+		old_layer = new_layer;
+		first_boot = false;
+	}
+	#endif //RGBLIGHT_ENABLE
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	return true;
 }
 
-void led_set_user(uint8_t usb_led) {
-}
+/*void led_set_user(uint8_t usb_led) {
+}*/
