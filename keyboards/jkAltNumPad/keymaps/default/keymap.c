@@ -3,10 +3,6 @@
 // keymap and RGB light per layer from: 
 // https://github.com/AGausmann/qmk_firmware/blob/agausmann-v3.x/keyboards/nyquist/keymaps/agausmann/keymap.c
 
-/*#ifdef RGBLIGHT_ENABLE
-#include "rgblight.h"
-#endif*/
-
 #define LAYER_NUMPAD 0
 #define LAYER_NUMBERS 1
 #define LAYER_CONSOLE 2
@@ -93,45 +89,44 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	return MACRO_NONE;
 }
 
-void persistent_default_layer_set(uint16_t default_layer) {
+/*void persistent_default_layer_set(uint16_t default_layer) {
 	eeconfig_update_default_layer(default_layer);
 	default_layer_set(default_layer);
-}
+}*/
 
 void matrix_init_user(void) {
 	rgblight_enable();
-	rgblight_setrgb(0x00, 0xFF, 0x00);
-	//static uint8_t old_layer = 25;
 }
 
-void matrix_scan_user(void) {
-	//return;
-	#ifdef RGBLIGHT_ENABLE
-	static uint8_t old_layer = 255;
-	static bool first_boot = true;
-	uint8_t new_layer = /*first_boot ? 0 :*/ biton32(layer_state);
+//static uint8_t last_layer_for_color = 255;
 
-	if (/*first_boot ? true :*/ old_layer != new_layer) {
-		//rgblight_enable();
-  		switch (new_layer) {
+void matrix_scan_user(void) {
+	#ifdef RGBLIGHT_ENABLE
+	static uint8_t last_layer_for_color = 255;
+	uint8_t current_layer = biton32(layer_state);
+
+	if (last_layer_for_color != current_layer) {
+  		switch (current_layer) {
 			case LAYER_NUMPAD:
-				rgblight_setrgb(0x00, 0x00, 0xFF);
+				rgblight_setrgb(0xFF, 0x30, 0x00);
 			break;
 			case LAYER_NUMBERS:
 				rgblight_setrgb(0x00, 0xF4, 0xFF);
 			break;
 			case LAYER_CONSOLE:
-				rgblight_setrgb(0xFF, 0x00, 0x66);
+				rgblight_setrgb(0x40, 0xFF, 0x00);
 			break;
 			case LAYER_NAV_CLUSTER:
-				rgblight_setrgb(0x90, 0x00, 0xFF);
+				rgblight_setrgb(0xFF, 0x00, 0xFF);
 			break;
 			case LAYER_SETUP:
 				rgblight_setrgb(0xFF, 0x00, 0x00);
 			break;
+			default:
+				rgblight_setrgb(0x00, 0xFF, 0x00);
+			break;
 		}
-		old_layer = new_layer;
-		first_boot = false;
+		last_layer_for_color = current_layer;
 	}
 	#endif //RGBLIGHT_ENABLE
 }
