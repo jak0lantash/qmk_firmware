@@ -89,51 +89,46 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	return MACRO_NONE;
 }
 
-/*void persistent_default_layer_set(uint16_t default_layer) {
-	eeconfig_update_default_layer(default_layer);
-	default_layer_set(default_layer);
-}*/
+#define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
+#define COLOR_BLUE_HSV 240, 255, 255
+#define COLOR_ORANGE_RGB 0xFF, 0x30, 0x00
+#define COLOR_ORANGE_HSV 37, 255, 255
+#define COLOR_CYAN_RGB 0x00, 0xF4, 0xFF
+#define COLOR_PINK_RGB 0xFF, 0x00, 0xFF
+#define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
+#define COLOR_RED_RGB 0xFF, 0x00, 0x00
 
 void matrix_init_user(void) {
+	//rgblight_init();
 	rgblight_enable();
+	rgblight_sethsv (COLOR_ORANGE_HSV);
 }
 
-//static uint8_t last_layer_for_color = 255;
-
-void matrix_scan_user(void) {
-	#ifdef RGBLIGHT_ENABLE
-	static uint8_t last_layer_for_color = 255;
-	uint8_t current_layer = biton32(layer_state);
-
-	if (last_layer_for_color != current_layer) {
-  		switch (current_layer) {
-			case LAYER_NUMPAD:
-				rgblight_setrgb(0xFF, 0x30, 0x00);
-			break;
-			case LAYER_NUMBERS:
-				rgblight_setrgb(0x00, 0xF4, 0xFF);
-			break;
-			case LAYER_CONSOLE:
-				rgblight_setrgb(0x40, 0xFF, 0x00);
-			break;
-			case LAYER_NAV_CLUSTER:
-				rgblight_setrgb(0xFF, 0x00, 0xFF);
-			break;
-			case LAYER_SETUP:
-				rgblight_setrgb(0xFF, 0x00, 0x00);
-			break;
-			default:
-				rgblight_setrgb(0x00, 0xFF, 0x00);
-			break;
-		}
-		last_layer_for_color = current_layer;
-	}
-	#endif //RGBLIGHT_ENABLE
-}
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-	return true;
-}
-
-/*void led_set_user(uint8_t usb_led) {
+/*uint32_t default_layer_state_set_kb(uint32_t state) {
+	//rgblight_sethsv (COLOR_ORANGE_HSV);
+	return state;
 }*/
+
+uint32_t layer_state_set_user(uint32_t state) {
+	switch (biton32(state)) {
+		case LAYER_NUMPAD:
+			rgblight_setrgb (COLOR_ORANGE_RGB);
+		break;
+		case LAYER_NUMBERS:
+			rgblight_setrgb (COLOR_CYAN_RGB);
+		break;
+		case LAYER_CONSOLE:
+			rgblight_setrgb (COLOR_GREEN_RGB);
+		break;
+		case LAYER_NAV_CLUSTER:
+			rgblight_setrgb (COLOR_PINK_RGB);
+		break;
+		case LAYER_SETUP:
+			rgblight_setrgb (COLOR_RED_RGB);
+		break;
+		default: //  for any other layers, or the default layer
+			//rgblight_sethsv (COLOR_ORANGE_HSV);
+		break;
+	}
+	return state;
+}
