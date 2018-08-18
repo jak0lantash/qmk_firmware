@@ -12,11 +12,6 @@
 #define _______ KC_TRNS
 #define xxxxxxx KC_NO
 
-enum custom_keycodes {
-	VMW_PWD = SAFE_RANGE,
-	PIPE
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[LAYER_NUMPAD] = KEYMAP(
@@ -25,7 +20,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_P7,  	KC_P8, 		KC_P9, 
 		KC_P4,  	KC_P5, 		KC_P6, 		KC_PPLS, 
 		KC_P1,  	KC_P2, 		KC_P3, 
-		KC_P0,  	KC_PDOT, 	KC_PENT),
+		KC_P0,  	KC_PDOT, 			ALT_T(KC_PENT)),
 
 	[LAYER_NUMBERS] = KEYMAP(
 		_______, 	_______, 	_______, 	TO(0), 
@@ -33,15 +28,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_7, 		KC_8, 		KC_9, 
 		KC_4, 		KC_5, 		KC_6, 		KC_PLUS, 
 		KC_1,		KC_2, 		KC_3, 
-		KC_0, 		KC_DOT, 	KC_ENT),
+		KC_0, 		KC_DOT, 			KC_ENT),
 
 	[LAYER_CONSOLE] = KEYMAP(
 		_______, 	_______,	_______, 	TO(0), 
-		KC_BSPC, 	xxxxxxx,	xxxxxxx, 	xxxxxxx, 
+		KC_BSPC, 	M(3),		M(0), 		M(4), 
 		KC_P7, 		KC_P8, 		KC_P9, 
-		KC_P4, 		KC_P5, 		KC_P6, 		VMW_PWD, 
+		KC_P4, 		KC_P5, 		KC_P6, 		M(5), 
 		KC_P1, 		KC_P2, 		KC_P3, 
-		KC_P0, 		PIPE, 		KC_LALT),
+		KC_P0, 		M(2), 				KC_LALT),
 
 	[LAYER_NAV_CLUSTER] = KEYMAP(
 		MO(4), 		_______,	_______, 	TO(0), 
@@ -49,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_DEL, 	KC_END, 	KC_PGDN, 
 		KC_NO, 		KC_UP, 		KC_NO, 		KC_RGUI, 
 		KC_LEFT, 	KC_DOWN, 	KC_RGHT, 
-		KC_LCTL, 	KC_LSFT, 	KC_ENT),
+		KC_LCTL, 	KC_LSFT, 			KC_ENT),
 
 	
 	[LAYER_SETUP] = KEYMAP(
@@ -58,25 +53,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
 		RGB_HUI, 	RGB_SAI, 	RGB_VAI, 	xxxxxxx, 
 		RGB_HUD, 	RGB_SAD, 	RGB_VAD, 
-		RGB_TOG, 	RGB_MOD, 	RGB_MODE_PLAIN)
+		RGB_TOG, 	RGB_MOD, 			RGB_MODE_PLAIN)
 
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-	if (record->event.pressed) {
-		switch(keycode) {
-			case VMW_PWD:
-				SEND_STRING("VMware1!");
-				return false;
-			case PIPE:
-				SEND_STRING(SS_LALT(SS_TAP(X_KP_1) SS_TAP(X_KP_2) SS_TAP(X_KP_4)));
-				return false;
-		}
-	}
-	return true;
-}
-
-/*const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	//keyevent_t event = record->event;
 
 	switch (id) {
@@ -123,7 +104,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			break;
 	}
 	return MACRO_NONE;
-}*/
+}
 
 #define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
 #define COLOR_BLUE_HSV 240, 255, 255
