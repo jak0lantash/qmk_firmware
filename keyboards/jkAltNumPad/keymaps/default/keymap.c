@@ -65,10 +65,10 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 			if (record->event.pressed) {
 				return MACRO( 
 						T(E), T(N), T(ENT), 
-						D(LSFT), T(V), T(M), U(LSFT), T(W), T(A), D(R), D(E), U(R), U(E), KC_1, D(LSFT), KC_1, U(LSFT), T(ENT),
+						D(LSFT), T(V), T(M), U(LSFT), T(W), T(A), T(R), T(E), T(1), D(LSFT), T(1), U(LSFT), T(ENT),
 						T(S), T(T), T(SPC), T(E), T(ENT),
 						T(Y), T(ENT),
-						D(LSFT), T(I), U(LSFT), D(LSFT), T(A), U(LSFT), T(M), D(LSFT), T(O), U(LSFT), T(N), D(LSFT), T(T), U(LSFT), T(H), T(E), D(LSFT), T(P), U(LSFT), T(H), T(O), T(N), T(E), D(LSFT), T(W), U(LSFT), T(I), T(T), T(H), D(LSFT), T(T), U(LSFT), T(E), T(C), T(H), D(LSFT), T(S), U(LSFT), T(U), T(P), T(P), T(O), D(R), D(T), U(R), U(T), T(ENT),
+						D(LSFT), T(I), T(A), U(LSFT), T(M), D(LSFT), T(O), U(LSFT), T(N), D(LSFT), T(T), U(LSFT), T(H), T(E), D(LSFT), T(P), U(LSFT), T(H), T(O), T(N), T(E), D(LSFT), T(W), U(LSFT), T(I), T(T), T(H), D(LSFT), T(T), U(LSFT), T(E), T(C), T(H), D(LSFT), T(S), U(LSFT), T(U), T(P), T(P), T(O), D(R), D(T), U(R), U(T), T(ENT),
 					END );
 			}
 			break;
@@ -89,16 +89,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 			break;
 		case 4:
 			if (record->event.pressed) {
-				return MACRO(
-						T(A), T(D), T(M), T(I), T(N), T(I), T(S), T(T), T(R), T(A), T(T), T(O), T(R), D(LCTL), D(LALT), T(0), U(LCTL), U(LALT), T(V), T(S), T(P), T(H), D(E), D(R), U(E), D(E), U(R), U(E), D(LSFT), D(DOT), U(LSFT), U(DOT), T(L), D(O), D(C), U(O), D(A), U(C), U(A), T(L), T(TAB),
-						D(LSFT), T(V), T(M), U(LSFT), T(W), T(A), D(R), D(E), U(R), U(E), D(LSFT), T(1), U(LSFT), T(ENT),
-					END );
+				return MACRO( T(A), T(D), T(M), T(I), T(N), T(I), T(S), T(T), T(R), T(A), T(T), T(O), T(R), D(LSFT), T(2), U(LSFT), T(V), T(S), T(P), T(H), T(E), T(R), T(E), T(DOT), T(L), T(O), T(C), T(A), T(L), T(TAB), D(LSFT), T(V), T(M), U(LSFT), T(W), T(A), T(R), T(E), T(1), D(LSFT), T(1), U(LSFT), T(ENT), END );
 			}
 			break;
 		case 5:
 			if (record->event.pressed) {
 				return MACRO(
-						D(LSFT), T(V), T(M), U(LSFT), T(W), T(A), D(R), D(E), U(R), U(E), T(1), D(LSFT), T(1), U(LSFT),
+						D(LSFT), T(V), T(M), U(LSFT), T(W), T(A), T(R), T(E), T(1), D(LSFT), T(1), U(LSFT),
 					END );
 			}
 			break;
@@ -123,7 +120,6 @@ void matrix_init_user(void) {
 
 /*uint32_t default_layer_state_set_kb(uint32_t state) {
 	//rgblight_sethsv (COLOR_ORANGE_HSV);
-	return state;
 }*/
 
 uint32_t layer_state_set_user(uint32_t state) {
