@@ -8,6 +8,7 @@
 #define LAYER_CONSOLE 2
 #define LAYER_NAV_CLUSTER 3
 #define LAYER_SETUP 4
+#define LAYER_ISO 5
 
 #define _______ KC_TRNS
 #define xxxxxxx KC_NO
@@ -15,7 +16,7 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[LAYER_NUMPAD] = KEYMAP(
-		TO(3),  	TO(2), 		TO(1), 		KC_LALT, 
+		TO(3),  	TO(2), 		TO(1), 		TG(5), 
 		KC_BSPC, 	KC_PSLS, 	KC_PAST, 	KC_PMNS, 
 		KC_P7,  	KC_P8, 		KC_P9, 
 		KC_P4,  	KC_P5, 		KC_P6, 		KC_PPLS, 
@@ -53,7 +54,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
 		RGB_HUI, 	RGB_SAI, 	RGB_VAI, 	xxxxxxx, 
 		RGB_HUD, 	RGB_SAD, 	RGB_VAD, 
-		RGB_TOG, 	RGB_MOD, 			RGB_MODE_PLAIN)
+		RGB_TOG, 	RGB_MOD, 			RGB_MODE_PLAIN),
+
+	[LAYER_ISO] = KEYMAP(
+		_______,	_______,	_______,	_______,
+		_______,	M(10),		M(11),		_______,
+		_______,	_______,	_______,
+		_______,	_______,	_______,	_______,
+		_______,	_______,	_______,
+		_______,	_______,			_______)
 
 };
 
@@ -82,7 +91,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 		case 3:
 			if (record->event.pressed) {
 				return MACRO(
-					T(MINS), T(O), T(SPC), D(LALT), T(P1), T(P2), T(P4), U(LALT),
+					T(MINS), T(O), T(SPC), T(MINS), T(SPC), D(LALT), T(P1), T(P2), T(P4), U(LALT),
 					T(SPC), T(T), T(C), T(P), T(D), T(U), T(M), T(P), T(MINS), T(U), T(W), T(SPC), T(MINS), T(E), T(N), T(R), T(SPC), T(MINS), T(SPC),
 				END );
 			}
@@ -102,6 +111,20 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 				END );
 			}
 			break;
+		case 10:
+			if (record->event.pressed) {
+				return MACRO(
+					D(LALT), T(P8), T(P4), U(LALT),
+				END );
+			}
+			break;
+		case 11:
+			if (record->event.pressed) {
+				return MACRO(
+					D(LALT), T(P5), T(P8), U(LALT),
+				END );
+			}
+			break;
 	}
 	return MACRO_NONE;
 }
@@ -114,6 +137,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 #define COLOR_PINK_RGB 0xFF, 0x00, 0xFF
 #define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
 #define COLOR_RED_RGB 0xFF, 0x00, 0x00
+#define COLOR_YELLOW_RGB 0xFF, 0xFF, 0x00
 
 void matrix_init_user(void) {
 	//rgblight_init();
@@ -141,6 +165,9 @@ uint32_t layer_state_set_user(uint32_t state) {
 		break;
 		case LAYER_SETUP:
 			rgblight_setrgb (COLOR_RED_RGB);
+		break;
+		case LAYER_ISO:
+			rgblight_setrgb (COLOR_YELLOW_RGB);
 		break;
 		default: //  for any other layers, or the default layer
 			//rgblight_sethsv (COLOR_ORANGE_HSV);
