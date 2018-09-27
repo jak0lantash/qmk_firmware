@@ -18,8 +18,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_P0,		LT(1, KC_LGUI), KC_PENT,	KC_PPLS),
 
 	[LAYER_SETUP] = LAYOUT_ortho_4x4(
-		_______,	_______,	_______,	_______,
-		_______,	_______,	_______,	_______,
+		RGB_HUI,	RGB_SAI,	RGB_VAI,	RGB_M_R,
+		RGB_HUD,	RGB_SAD,	RGB_VAD,	RGB_M_SW,
 		RGB_TOG,	RGB_MOD,	RGB_RMOD,	RGB_M_P,
 		_______,	_______,	_______,	RESET)
 };
@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
 #define COLOR_BLUE_HSV 240, 255, 255
 #define COLOR_ORANGE_RGB 0xFF, 0x30, 0x00
-#define COLOR_ORANGE_HSV 37, 255, 255
+#define COLOR_ORANGE_HSV 37, 255, 200
 #define COLOR_CYAN_RGB 0x00, 0xF4, 0xFF
 #define COLOR_PINK_RGB 0xFF, 0x00, 0xFF
 #define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
