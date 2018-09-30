@@ -2,6 +2,8 @@
 
 #define LAYER_MACROS 0
 #define LAYER_SETUP 1
+#define LAYER_BLANK 2
+#define LAYER_BLANK_BACK 3
 
 enum custom_keycodes {
 	M_CDSR = SAFE_RANGE,
@@ -33,10 +35,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		M_OUTLOOK,	M_MREMOTENG,	M_NOTEPAD,	M_SCOPY),
 
 	[LAYER_SETUP] = LAYOUT_ortho_4x4(
-		_______,	_______,	_______,	RGB_M_R,
+		_______,	TG(2),		_______,	RGB_M_R,
 		RGB_HUI,	RGB_SAI,	RGB_VAI,	RGB_M_SW,
 		RGB_HUD,	RGB_SAD,	RGB_VAD,	RGB_M_P,
-		RGB_TOG,	RGB_MOD,	RGB_RMOD,	RESET)
+		RGB_TOG,	RGB_MOD,	RGB_RMOD,	RESET),
+
+	[LAYER_BLANK] = LAYOUT_ortho_4x4(
+		MO(3),		xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx),
+
+	[LAYER_BLANK_BACK] = LAYOUT_ortho_4x4(
+		_______,	_______,	_______,	_______,
+		_______,	_______,	_______,	_______,
+		_______,	_______,	_______,	_______,
+		_______,	_______,	_______,	TG(2))
 };
 
 #define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
@@ -50,22 +64,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define COLOR_RED_HSV 0, 255, 255
 #define COLOR_YELLOW_RGB 0xFF, 0xFF, 0x00
 
-bool first_boot = true;
-int first_boot_time = 0;
+//bool first_boot = true;
+//int first_boot_time = 0;
 
 void matrix_init_user(void) {
 	//rgblight_init();
 	rgblight_enable();
-	rgblight_sethsv (COLOR_RED_HSV);
-	first_boot_time = timer_read();
+	rgblight_sethsv (COLOR_ORANGE_HSV);
+	//rgblight_sethsv (COLOR_RED_HSV);
+	//first_boot_time = timer_read();
 }
 
-void matrix_scan_user(void) {
+/*void matrix_scan_user(void) {
 	if (first_boot && timer_elapsed(first_boot_time) > 1000) {
 		first_boot = false;
 		rgblight_sethsv (COLOR_ORANGE_HSV);
 	}
-}
+}*/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	if (record->event.pressed) switch (keycode) {
@@ -144,8 +159,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 uint32_t layer_state_set_user(uint32_t state) {
 	switch (biton32(state)) {
 		case LAYER_MACROS:
-			if (false) rgblight_setrgb (COLOR_ORANGE_RGB);
+			rgblight_sethsv (COLOR_ORANGE_HSV);
+			break;
+		case LAYER_SETUP:
+			rgblight_setrgb (COLOR_RED_RGB);
+			break;
+		case LAYER_BLANK:
+		case LAYER_BLANK_BACK:
+			rgblight_setrgb (COLOR_CYAN_RGB);
 			break;
 	}
 	return state;
-}	
+}
