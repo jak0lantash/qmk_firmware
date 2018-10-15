@@ -13,19 +13,31 @@
 
 #define _______ KC_TRNS
 #define xxxxxxx KC_NO
+#define TOL_NUMPAD TO(0)
+#define TOL_NAV_CLUST TO(LAYER_NAV_CLUSTER)
+#define TOL_CONSOLE TO(LAYER_CONSOLE)
+#define TOL_NUMBERS TO(LAYER_NUMBERS)
+#define TGL_ISO TG(LAYER_ISO)
+#define MOL_SETUP MO(LAYER_SETUP)
+#define LTL_MACROS LT(LAYER_MACROS, KC_PDOT)
+#define ALT_PENT ALT_T(KC_PENT)
+
+enum custom_keycodes {
+	M_CREDSSP = SAFE_RANGE
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[LAYER_NUMPAD] = KEYMAP(
-		TO(3),  	TO(2), 		TO(1), 		TG(4), 
+		TOL_NAV_CLUST, 	TOL_CONSOLE,	TOL_NUMBERS,	TGL_ISO, 
 		KC_BSPC, 	KC_PSLS, 	KC_PAST, 	KC_PMNS, 
 		KC_P7,  	KC_P8, 		KC_P9, 
 		KC_P4,  	KC_P5, 		KC_P6, 		KC_PPLS, 
 		KC_P1,  	KC_P2, 		KC_P3, 
-		KC_P0,  	LT(5, KC_PDOT),			ALT_T(KC_PENT)),
+		KC_P0,  	LTL_MACROS,			ALT_PENT),
 
 	[LAYER_NUMBERS] = KEYMAP(
-		_______, 	_______, 	_______, 	TO(0), 
+		_______, 	_______, 	_______, 	TOL_NUMPAD, 
 		_______, 	KC_SLSH, 	KC_ASTR, 	KC_MINS, 
 		KC_7, 		KC_8, 		KC_9, 
 		KC_4, 		KC_5, 		KC_6, 		KC_PLUS, 
@@ -33,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_0, 		KC_DOT, 			KC_ENT),
 
 	[LAYER_CONSOLE] = KEYMAP(
-		_______, 	_______,	_______, 	TO(0), 
+		_______, 	_______,	_______, 	TOL_NUMPAD, 
 		KC_BSPC, 	M(3),		M(0), 		M(4), 
 		KC_P7, 		KC_P8, 		KC_P9, 
 		KC_P4, 		KC_P5, 		KC_P6, 		M(5), 
@@ -41,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_P0, 		M(2), 				KC_LALT),
 
 	[LAYER_NAV_CLUSTER] = KEYMAP(
-		MO(6), 		_______,	_______, 	TO(0), 
+		MOL_SETUP,	_______,	_______, 	TOL_NUMPAD, 
 		KC_INS, 	KC_HOME, 	KC_PGUP, 	KC_SLSH, 
 		KC_DEL, 	KC_END, 	KC_PGDN, 
 		KC_NO, 		KC_UP, 		KC_NO, 		KC_RGUI, 
@@ -59,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[LAYER_MACROS] = KEYMAP(
 		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		xxxxxxx,	xxxxxxx,	xxxxxxx,
+		M_CREDSSP,	xxxxxxx,	xxxxxxx,
 		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		M(2),		xxxxxxx,	xxxxxxx,
 		KC_CALC,	_______,			xxxxxxx),
@@ -145,6 +157,22 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	return MACRO_NONE;
 }
 
+int last_keystroke = 0;
+bool layer_not_default = false;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	if (!record->event.pressed)
+		last_keystroke = timer_read();
+	if (record->event.pressed) switch (keycode) {
+		case M_CREDSSP:
+			SEND_STRING("REG ADD HKLM" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Software" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Microsoft" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Windows" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "CurrentVersion" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Policies" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "System" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "CredSSP" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Parameters" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) " " SS_DOWN(X_LALT) SS_TAP(X_KP_4) SS_TAP(X_KP_7) SS_UP(X_LALT) "v AllowEncryptionOracle " SS_DOWN(X_LALT) SS_TAP(X_KP_4) SS_TAP(X_KP_7) SS_UP(X_LALT) "t REG_DWORD " SS_DOWN(X_LALT) SS_TAP(X_KP_4) SS_TAP(X_KP_7) SS_UP(X_LALT) "d 2");
+			return false;
+			break;
+	}
+	return true;
+}
+
+
 #define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
 #define COLOR_BLUE_HSV 240, 255, 255
 #define COLOR_ORANGE_RGB 0xFF, 0x30, 0x00
@@ -154,9 +182,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 #define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
 #define COLOR_RED_RGB 0xFF, 0x00, 0x00
 #define COLOR_YELLOW_RGB 0xFF, 0xFF, 0x00
-
-int last_keystroke = 0;
-bool layer_not_default = false;
 
 void matrix_init_user(void) {
 	//rgblight_init();
@@ -175,13 +200,6 @@ void matrix_scan_user(void) {
 		layer_move(0);
 	}
 }
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-	if (!record->event.pressed)
-		last_keystroke = timer_read();
-	return true;
-}
-	
 
 uint32_t layer_state_set_user(uint32_t state) {
 	switch (biton32(state)) {
