@@ -10,17 +10,22 @@
 #define LAYER_SETUP 6
 #define LAYER_ISO 4
 #define LAYER_MACROS 5
+#define LAYER_TESTER 7
+#define LAYER_TESTER_BACK 8
 
 #define _______ KC_TRNS
 #define xxxxxxx KC_NO
-#define TOL_NUMPAD TO(0)
+#define TOL_NUMPAD TO(LAYER_NUMPAD)
 #define TOL_NAV_CLUST TO(LAYER_NAV_CLUSTER)
 #define TOL_CONSOLE TO(LAYER_CONSOLE)
 #define TOL_NUMBERS TO(LAYER_NUMBERS)
 #define TGL_ISO TG(LAYER_ISO)
 #define MOL_SETUP MO(LAYER_SETUP)
 #define LTL_MACROS LT(LAYER_MACROS, KC_PDOT)
+#define TOL_MACROS TO(LAYER_MACROS)
 #define ALT_PENT ALT_T(KC_PENT)
+#define TGL_TESTER TG(LAYER_TESTER)
+#define MOL_TST_BK MO(LAYER_TESTER_BACK)
 
 enum custom_keycodes {
 	M_CREDSSP = SAFE_RANGE
@@ -29,7 +34,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[LAYER_NUMPAD] = KEYMAP(
-		TOL_NAV_CLUST, 	TOL_CONSOLE,	TOL_NUMBERS,	TGL_ISO, 
+		TOL_NAV_CLUST, 	TOL_MACROS,	TOL_NUMBERS,	TGL_ISO, 
 		KC_BSPC, 	KC_PSLS, 	KC_PAST, 	KC_PMNS, 
 		KC_P7,  	KC_P8, 		KC_P9, 
 		KC_P4,  	KC_P5, 		KC_P6, 		KC_PPLS, 
@@ -44,13 +49,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_1,		KC_2, 		KC_3, 
 		KC_0, 		KC_DOT, 			KC_ENT),
 
-	[LAYER_CONSOLE] = KEYMAP(
+/*	[LAYER_CONSOLE] = KEYMAP(
 		_______, 	_______,	_______, 	TOL_NUMPAD, 
 		KC_BSPC, 	M(3),		M(0), 		M(4), 
 		KC_P7, 		KC_P8, 		KC_P9, 
 		KC_P4, 		KC_P5, 		KC_P6, 		M(5), 
 		KC_P1, 		KC_P2, 		KC_P3, 
 		KC_P0, 		M(2), 				KC_LALT),
+*/
 
 	[LAYER_NAV_CLUSTER] = KEYMAP(
 		MOL_SETUP,	_______,	_______, 	TOL_NUMPAD, 
@@ -69,20 +75,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,	M(12),				_______),
 
 	[LAYER_MACROS] = KEYMAP(
-		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		_______,	_______,	_______,	_______,
+		KC_BSPC,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		M_CREDSSP,	xxxxxxx,	xxxxxxx,
-		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		M(2),		xxxxxxx,	xxxxxxx,
+		M(4),		M(0),		M(5),		xxxxxxx,
+		M(2),		M(3),		xxxxxxx,
 		KC_CALC,	_______,			xxxxxxx),
 
 	[LAYER_SETUP] = KEYMAP(
-		xxxxxxx, 	_______, 	xxxxxxx, 	RESET, 
+		_______, 	TGL_TESTER, 	xxxxxxx, 	RESET, 
 		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
 		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
 		RGB_HUI, 	RGB_SAI, 	RGB_VAI, 	xxxxxxx, 
 		RGB_HUD, 	RGB_SAD, 	RGB_VAD, 
-		RGB_TOG, 	RGB_MOD, 			RGB_MODE_PLAIN)
+		RGB_TOG, 	RGB_MOD, 			RGB_MODE_PLAIN),
+
+	[LAYER_TESTER] = KEYMAP(
+		MOL_TST_BK,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,			xxxxxxx),
+
+	[LAYER_TESTER_BACK] = KEYMAP(
+		_______,	_______,	_______,	_______,
+		_______,	_______,	_______,	_______,
+		_______,	_______,	_______,
+		_______,	_______,	_______,	_______,
+		_______,	_______,	_______,
+		_______,	_______,			TGL_TESTER)
 
 	
 };
@@ -177,11 +199,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define COLOR_BLUE_HSV 240, 255, 255
 #define COLOR_ORANGE_RGB 0xFF, 0x30, 0x00
 #define COLOR_ORANGE_HSV 25, 255, 255
-#define COLOR_CYAN_RGB 0x00, 0xF4, 0xFF
+#define COLOR_TURQUOISE_RGB 0x00, 0xF4, 0xFF
 #define COLOR_PINK_RGB 0xFF, 0x00, 0xFF
 #define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
 #define COLOR_RED_RGB 0xFF, 0x00, 0x00
 #define COLOR_YELLOW_RGB 0xFF, 0xFF, 0x00
+#define COLOR_PURPLE_RGB 0xFF, 0x00, 0x80
 
 void matrix_init_user(void) {
 	//rgblight_init();
@@ -208,14 +231,14 @@ uint32_t layer_state_set_user(uint32_t state) {
 			layer_not_default = false;
 			break;
 		case LAYER_NUMBERS:
-			rgblight_setrgb (COLOR_CYAN_RGB);
-			layer_not_default = true;
-			break;
-		case LAYER_CONSOLE:
 			rgblight_setrgb (COLOR_GREEN_RGB);
 			layer_not_default = true;
 			break;
-		case LAYER_NAV_CLUSTER:
+/*		case LAYER_CONSOLE:
+			rgblight_setrgb (COLOR_PINK_RGB);
+			layer_not_default = true;
+			break;
+*/		case LAYER_NAV_CLUSTER:
 			rgblight_setrgb (COLOR_PINK_RGB);
 			layer_not_default = true;
 			break;
@@ -229,6 +252,11 @@ uint32_t layer_state_set_user(uint32_t state) {
 			break;
 		case LAYER_MACROS:
 			rgblight_setrgb (COLOR_BLUE_RGB);
+			layer_not_default = false;
+			break;
+		case LAYER_TESTER:
+		case LAYER_TESTER_BACK:
+			rgblight_setrgb (COLOR_TURQUOISE_RGB);
 			layer_not_default = false;
 			break;
 		default: //  for any other layers, or the default layer
