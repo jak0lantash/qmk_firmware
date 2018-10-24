@@ -23,6 +23,8 @@ enum custom_keycodes {
 	M_OUTLOOK,
 	M_MREMOTENG,
 	M_NOTEPAD,
+	M_CHROME,
+	M_PHRASEXPR,
 	M_VCENTER,
 	M_STE,
 	M_VMWARE,
@@ -54,11 +56,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		RGB_TOG,	RGB_MOD,	RGB_RMOD,						RESET),
 
 	[LAYER_HW_MACROS] = KEYMAP(
-		_______,			_______,	_______,	_______,	_______,	_______,
-		_______,	_______,	_______,	_______,	_______,	_______,	_______,
+		_______,			M_LOCK,		_______,	_______,	M_WMP,		M_REPLACE,
+		M_TCPDUMP,	_______,	_______,	_______,	_______,	_______,	_______,
 		M_VCENTER,		M_STE,		M_VMWARE,	M_HJVMWARE,	M_HJ,		M_JHGMAIL,
-			_______,		_______,	_______,	_______,	_______,	_______,
-		_______,	_______,	_______,						_______),
+			M_OUTLOOK,		M_MREMOTENG,	M_NOTEPAD,	M_CHROME,	M_PHRASEXPR,	_______,
+		M_CDSR,		_______,	M_WAITCST,						M_SCOPY),
 
 	[LAYER_TESTER] = KEYMAP(
 		MOL_TST_BK,			xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
