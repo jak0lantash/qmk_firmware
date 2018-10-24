@@ -4,10 +4,13 @@
 //#define _______ KC_TRANS
 
 #define LAYER_SW_MACROS 0
-#define LAYER_SETUP 2
+#define LAYER_SETUP 5 
 #define LAYER_HW_MACROS 1
-#define LAYER_TESTER 3
-#define LAYER_TESTER_BACK 4
+#define LAYER_TESTER 6
+#define LAYER_TESTER_BACK 7
+#define LAYER_AUDIO 2
+#define LAYER_AUDIO2 3
+#define LAYER_AUDIO3 4
 
 #define _______ KC_TRNS
 #define xxxxxxx KC_NO
@@ -16,6 +19,8 @@
 #define MOL_SETUP MO(LAYER_SETUP)
 #define TGL_TESTER TG(LAYER_TESTER)
 #define MOL_TST_BK MO(LAYER_TESTER_BACK)
+#define TOL_AUDIO TO(LAYER_AUDIO)
+#define TOL_AUDIO2 TO(LAYER_AUDIO2)
 
 enum custom_keycodes {
 	M_CDSR = SAFE_RANGE,
@@ -49,8 +54,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_SPC, 	KC_SPC, 	KC_SPC, 						KC_NO),
 
 	[LAYER_SETUP] = KEYMAP(
-		_______,			TGL_TESTER,	TOL_SWMACROS,		TOL_HWMACROS,	xxxxxxx,	xxxxxxx,
-		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		_______,			TGL_TESTER,	TOL_SWMACROS,	TOL_HWMACROS,	TOL_AUDIO,	TOL_AUDIO2,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	TOL_AUDIO3,
 		RGB_M_SW,		RGB_HUI,	RGB_SAI,	RGB_VAI,	xxxxxxx,	xxxxxxx,
 			RGB_M_P,		RGB_HUD,	RGB_SAD,	RGB_VAD,	xxxxxxx,	xxxxxxx,
 		RGB_TOG,	RGB_MOD,	RGB_RMOD,						RESET),
@@ -74,8 +79,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,	_______,	_______,	_______,	_______,	_______,	_______,
 		_______,		_______,	_______,	_______,	_______,	_______,
 			_______,		_______,	_______,	_______,	_______,	_______,
-		_______,	_______,	_______,						TGL_TESTER)
+		_______,	_______,	_______,						TGL_TESTER),
 	
+	[LAYER_AUDIO] = KEYMAP(
+		_______,			AU_TOG,		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		LP_NUMB, ODE_TO_JOY, ROCK_A_BYE_BAB, CLOSE_ENCOUNTERS_5_NOT, DOE_A_DEER, IN_LIKE_FLINT,	IMPERIAL_MARC,
+		CLUEBOARD_SOUN, BASKET_CASE, STARTUP_SOUN, GOODBYE_SOUND, PLANCK_SOUN, PREONIC_SOUN,
+		QWERTY_SOUND, COLEMAK_SOUND, DVORAK_SOUND, PLOVER_SOUND, PLOVER_GOODBYE_SOUND, MUSIC_ON_SOUND,
+		AUDIO_ON_SOUND, AUDIO_OFF_SOUND, MUSIC_OFF_SOUND, VOICE_CHANGE_SOUND),
+
+	[LAYER_AUDIO2] = KEYMAP(
+		_______,			_______,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		CHROMATIC_SOUND, MAJOR_SOUND, MINOR_SOUND, GUITAR_SOUND, VIOLIN_SOUND, CAPS_LOCK_ON_SOUND, CAPS_LOCK_OFF_SOUND,
+		SCROLL_LOCK_ON_SOUND, SCROLL_LOCK_OFF_SOUND, NUM_LOCK_ON_SOUND, NUM_LOCK_OFF_SOUND, AG_NORM_SOUND, AG_SWAP_SOUND,
+		UNICODE_WINDOWS, UNICODE_LINUX, COIN_SOUND, ONE_UP_SOUND, SONIC_RING, ZELDA_PUZZLE,
+		ZELDA_TREASURE, TERMINAL_SOUND, OVERWATCH_THEME, MARIO_THEME),
+
+	[LAYER_AUDIO3] = KEYMAP(
+		_______,			_______,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		MARIO_GAMEOVER, MARIO_MUSHROOM, E1M1_DOOM, DISNEY_SONG, NUMBER_ONE, CABBAGE_SONG, OLD_SPICEi,
+		VICTORY_FANFARE_SHORT, ALL_STAR, xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+			xxxxxxx,		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,						xxxxxxx),
+
 
 };
 
@@ -97,17 +123,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 
 int last_keystroke = 0;
 bool layer_not_default = false;
-
-#define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
-#define COLOR_BLUE_HSV 240, 255, 255
-#define COLOR_ORANGE_RGB 0xFF, 0x30, 0x00
-#define COLOR_ORANGE_HSV 25, 255, 255
-#define COLOR_TURQUOISE_RGB 0x00, 0xF4, 0xFF
-#define COLOR_PINK_RGB 0xFF, 0x00, 0xFF
-#define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
-#define COLOR_RED_RGB 0xFF, 0x00, 0x00
-#define COLOR_YELLOW_RGB 0xFF, 0xFF, 0x00
-#define COLOR_PURPLE_RGB 0xFF, 0x00, 0x80
 
 void matrix_init_user(void) {
 	//rgblight_init();
@@ -199,6 +214,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+#define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
+#define COLOR_BLUE_HSV 240, 255, 255
+#define COLOR_ORANGE_RGB 0xFF, 0x30, 0x00
+#define COLOR_ORANGE_HSV 25, 255, 255
+#define COLOR_TURQUOISE_RGB 0x00, 0xF4, 0xFF
+#define COLOR_PINK_RGB 0xFF, 0x00, 0xFF
+#define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
+#define COLOR_RED_RGB 0xFF, 0x00, 0x00
+#define COLOR_YELLOW_RGB 0xFF, 0xFF, 0x00
+#define COLOR_PURPLE_RGB 0xFF, 0x00, 0x80
+
 uint32_t layer_state_set_user(uint32_t state) {
 	switch (biton32(state)) {
 		case LAYER_SW_MACROS:
@@ -216,6 +242,19 @@ uint32_t layer_state_set_user(uint32_t state) {
 		case LAYER_TESTER:
 		case LAYER_TESTER_BACK:
 			rgblight_setrgb (COLOR_TURQUOISE_RGB);
+			layer_not_default = true;
+			break;
+		case LAYER_AUDIO:
+			rgblight_setrgb (COLOR_YELLOW_RGB);
+			layer_not_default = true;
+			break;
+		case LAYER_AUDIO2:
+			rgblight_setrgb (COLOR_BLUE_RGB);
+			layer_not_default = true;
+			break;
+		case LAYER_AUDIO3:
+			rgblight_setrgb (COLOR_PINK_RGB);
+			layer_not_default = true;
 			break;
 	}
 	return state;
