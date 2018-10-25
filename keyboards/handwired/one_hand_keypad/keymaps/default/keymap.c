@@ -21,6 +21,7 @@
 #define MOL_TST_BK MO(LAYER_TESTER_BACK)
 #define TOL_AUDIO TO(LAYER_AUDIO)
 #define TOL_AUDIO2 TO(LAYER_AUDIO2)
+#define TOL_AUDIO3 TO(LAYER_AUDIO3)
 
 enum custom_keycodes {
 	M_CDSR = SAFE_RANGE,
@@ -40,8 +41,120 @@ enum custom_keycodes {
 	M_REPLACE,
 	M_LOCK,
 	M_WMP,
-	M_TCPDUMP
+	M_TCPDUMP,
+	A_LP_NUMB,
+	A_ODE_TO_JOY,
+	A_ROCK_A_BYE_BABY,
+	A_CLOSE_ENCOUNTERS_5_NOTE,
+	A_DOE_A_DEER,
+	A_IN_LIKE_FLINT,
+	A_IMPERIAL_MARCH,
+	A_CLUEBOARD_SOUND,
+	A_BASKET_CASE,
+	A_STARTUP_SOUND,
+	A_GOODBYE_SOUND,
+	A_PLANCK_SOUND,
+	A_PREONIC_SOUND,
+	A_QWERTY_SOUND, 
+	A_COLEMAK_SOUND, 
+	A_DVORAK_SOUND, 
+	A_PLOVER_SOUND, 
+	A_PLOVER_GOODBYE_SOUND, 
+	A_MUSIC_ON_SOUND, 
+	A_AUDIO_ON_SOUND, 
+	A_AUDIO_OFF_SOUND, 
+	A_MUSIC_OFF_SOUND, 
+  	A_VOICE_CHANGE_SOUND,
+	A_CHROMATIC_SOUND, 
+	A_MAJOR_SOUND, 
+	A_MINOR_SOUND, 
+	A_GUITAR_SOUND, 
+	A_VIOLIN_SOUND, 
+	A_CAPS_LOCK_ON_SOUND, 
+	A_CAPS_LOCK_OFF_SOUND,
+	A_SCROLL_LOCK_ON_SOUND, 
+	A_SCROLL_LOCK_OFF_SOUND, 
+	A_NUM_LOCK_ON_SOUND, 
+	A_NUM_LOCK_OFF_SOUND, 
+	A_AG_NORM_SOUND, 
+	A_AG_SWAP_SOUND,
+	A_UNICODE_WINDOWS, 
+	A_UNICODE_LINUX, 
+	A_COIN_SOUND, 
+	A_ONE_UP_SOUND, 
+	A_SONIC_RING, 
+	A_ZELDA_PUZZLE,
+	A_ZELDA_TREASURE, 
+	A_TERMINAL_SOUND, 
+	A_OVERWATCH_THEME, 
+	A_MARIO_THEME,
+	A_MARIO_GAMEOVER,
+	A_MARIO_MUSHROOM, 
+	A_E1M1_DOOM, 
+	A_DISNEY_SONG, 
+	A_NUMBER_ONE, 
+	A_CABBAGE_SONG, 
+	A_OLD_SPICE,
+	A_VICTORY_FANFARE_SHORT, 
+	A_ALL_STAR 
 };
+
+#ifdef AUDIO_ENABLE
+	float a_lp_numb[][2] = SONG(LP_NUMB);
+	float a_ode_to_joy[][2] = SONG(ODE_TO_JOY);
+	float a_rock_a_bye_bab[][2] = SONG(ROCK_A_BYE_BABY);
+	float a_close_encounters_5_not[][2] = SONG(CLOSE_ENCOUNTERS_5_NOTE);
+	float a_doe_a_deer[][2] = SONG(DOE_A_DEER);
+	float a_in_like_flint[][2] = SONG(IN_LIKE_FLINT);
+	float a_imperial_march[][2] = SONG(IMPERIAL_MARCH);
+	float a_clueboard_sound[][2] = SONG(CLUEBOARD_SOUND);
+	float a_basket_case[][2] = SONG(BASKET_CASE);
+	float a_startup_song[][2] = SONG(STARTUP_SOUND);
+	float a_goodbye_sound[][2] = SONG(GOODBYE_SOUND);
+	float a_planck_sound[][2] = SONG(PLANCK_SOUND);
+	float a_qwerty_sound[][2] = SONG(QWERTY_SOUND);
+	float a_colemak_sound[][2] = SONG(COLEMAK_SOUND);
+	float a_dvorak_sound[][2] = SONG(DVORAK_SOUND);
+	float a_plover_sound[][2] = SONG(PLOVER_SOUND);
+	float a_plover_goodbye_sound[][2] = SONG(PLOVER_GOODBYE_SOUND);
+	float a_music_on_sound[][2] = SONG(MUSIC_ON_SOUND);
+	float a_audio_on_sound[][2] = SONG(AUDIO_ON_SOUND);
+	float a_audio_off_sound[][2] = SONG(AUDIO_OFF_SOUND);
+	float a_music_off_sound[][2] = SONG(MUSIC_OFF_SOUND);
+	float a_dhromatic_sound[][2] = SONG(CHROMATIC_SOUND);
+	float a_major_sound[][2] = SONG(MAJOR_SOUND);
+	float a_minor_sound[][2] = SONG(MINOR_SOUND);
+	float a_guitar_sound[][2] = SONG(GUITAR_SOUND);
+	float a_violin_sound[][2] = SONG(VIOLIN_SOUND);
+	float a_caps_lock_on_sound[][2] = SONG(CAPS_LOCK_ON_SOUND);
+	float a_caps_lock_off_sound[][2] = SONG(CAPS_LOCK_OFF_SOUND);
+	float a_scroll_lock_on_sound[][2] = SONG(SCROLL_LOCK_ON_SOUND);
+	float a_scroll_lock_off_sound[][2] = SONG(SCROLL_LOCK_OFF_SOUND);
+	float a_num_lock_on_sound[][2] = SONG(NUM_LOCK_ON_SOUND);
+	float a_num_lock_off_sound[][2] = SONG(NUM_LOCK_OFF_SOUND);
+	float a_ag_norm_sound[][2] = SONG(AG_NORM_SOUND);
+	float a_ag_swap_sound[][2] = SONG(AG_SWAP_SOUND);
+	float a_unicode_windows[][2] = SONG(UNICODE_WINDOWS);
+	float a_unicode_linux[][2] = SONG(UNICODE_LINUX);
+	float a_coin_sound[][2] = SONG(COIN_SOUND);
+	float a_one_up_sound[][2] = SONG(ONE_UP_SOUND);
+	float a_sonic_ring[][2] = SONG(SONIC_RING);
+	float a_zelda_puzzle[][2] = SONG(ZELDA_PUZZLE);
+	float a_zelda_treasure[][2] = SONG(ZELDA_TREASURE);
+	float a_terminal_sound[][2] = SONG(TERMINAL_SOUND);
+	float a_overwatch_theme[][2] = SONG(OVERWATCH_THEME);
+	float a_mario_theme[][2] = SONG(MARIO_THEME);
+	float a_mario_gameover[][2] = SONG(MARIO_GAMEOVER);
+	float a_mario_mushroom[][2] = SONG(MARIO_MUSHROOM);
+	float a_e1m1_doom[][2] = SONG(E1M1_DOOM);
+	float a_disney_song[][2] = SONG(DISNEY_SONG);
+	float a_number_one[][2] = SONG(NUMBER_ONE);
+	float a_cabbage_song[][2] = SONG(CABBAGE_SONG);
+	float a_old_spicei[][2] = SONG(OLD_SPICE);
+	float a_victory_fanfare_short[][2] = SONG(VICTORY_FANFARE_SHORT);
+	float a_all_star[][2] = SONG(ALL_STAR);
+	float a_voice_change_sound[][2] = SONG(VOICE_CHANGE_SOUND);
+#endif
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -82,25 +195,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,	_______,	_______,						TGL_TESTER),
 	
 	[LAYER_AUDIO] = KEYMAP(
-		_______,			AU_TOG,		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		LP_NUMB, ODE_TO_JOY, ROCK_A_BYE_BAB, CLOSE_ENCOUNTERS_5_NOT, DOE_A_DEER, IN_LIKE_FLINT,	IMPERIAL_MARC,
-		CLUEBOARD_SOUN, BASKET_CASE, STARTUP_SOUN, GOODBYE_SOUND, PLANCK_SOUN, PREONIC_SOUN,
-		QWERTY_SOUND, COLEMAK_SOUND, DVORAK_SOUND, PLOVER_SOUND, PLOVER_GOODBYE_SOUND, MUSIC_ON_SOUND,
-		AUDIO_ON_SOUND, AUDIO_OFF_SOUND, MUSIC_OFF_SOUND, VOICE_CHANGE_SOUND),
+		_______,			_______,	_______,	_______,	_______,	_______,
+		A_LP_NUMB,	A_ODE_TO_JOY,	A_ROCK_A_BYE_BABY,	A_CLOSE_ENCOUNTERS_5_NOTE,	A_DOE_A_DEER,	A_IN_LIKE_FLINT,	A_IMPERIAL_MARCH,
+		A_CLUEBOARD_SOUND, 	A_BASKET_CASE, 	A_STARTUP_SOUND, 	A_GOODBYE_SOUND, 	A_PLANCK_SOUND, 	A_PREONIC_SOUND,
+		A_QWERTY_SOUND, 	A_COLEMAK_SOUND, 	A_DVORAK_SOUND, 	A_PLOVER_SOUND, 	A_PLOVER_GOODBYE_SOUND, A_MUSIC_ON_SOUND, 
+		A_AUDIO_ON_SOUND, 	A_AUDIO_OFF_SOUND, 	A_MUSIC_OFF_SOUND, 	AU_TOG),
 
 	[LAYER_AUDIO2] = KEYMAP(
 		_______,			_______,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		CHROMATIC_SOUND, MAJOR_SOUND, MINOR_SOUND, GUITAR_SOUND, VIOLIN_SOUND, CAPS_LOCK_ON_SOUND, CAPS_LOCK_OFF_SOUND,
-		SCROLL_LOCK_ON_SOUND, SCROLL_LOCK_OFF_SOUND, NUM_LOCK_ON_SOUND, NUM_LOCK_OFF_SOUND, AG_NORM_SOUND, AG_SWAP_SOUND,
-		UNICODE_WINDOWS, UNICODE_LINUX, COIN_SOUND, ONE_UP_SOUND, SONIC_RING, ZELDA_PUZZLE,
-		ZELDA_TREASURE, TERMINAL_SOUND, OVERWATCH_THEME, MARIO_THEME),
+		A_CHROMATIC_SOUND, 	A_MAJOR_SOUND, 	A_MINOR_SOUND, 	A_GUITAR_SOUND, 	A_VIOLIN_SOUND, 	A_CAPS_LOCK_ON_SOUND, 	A_CAPS_LOCK_OFF_SOUND,
+		A_SCROLL_LOCK_ON_SOUND, 	A_SCROLL_LOCK_OFF_SOUND, 	A_NUM_LOCK_ON_SOUND, 	A_NUM_LOCK_OFF_SOUND, 	A_AG_NORM_SOUND, 	A_AG_SWAP_SOUND,
+		A_UNICODE_WINDOWS, 	A_UNICODE_LINUX, 	A_COIN_SOUND, 	A_ONE_UP_SOUND, 	A_SONIC_RING, 	A_ZELDA_PUZZLE,
+		A_ZELDA_TREASURE, 	A_TERMINAL_SOUND, 	A_OVERWATCH_THEME, 	AU_TOG),
 
 	[LAYER_AUDIO3] = KEYMAP(
 		_______,			_______,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		MARIO_GAMEOVER, MARIO_MUSHROOM, E1M1_DOOM, DISNEY_SONG, NUMBER_ONE, CABBAGE_SONG, OLD_SPICEi,
-		VICTORY_FANFARE_SHORT, ALL_STAR, xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		A_MARIO_GAMEOVER, 	A_MARIO_MUSHROOM, 	A_E1M1_DOOM, 	A_DISNEY_SONG, 	A_NUMBER_ONE, 	A_CABBAGE_SONG, 	A_OLD_SPICE,
+		A_VICTORY_FANFARE_SHORT, 	A_ALL_STAR, 	A_VOICE_CHANGE_SOUND,	A_MARIO_THEME,	xxxxxxx,	xxxxxxx,
 			xxxxxxx,		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		xxxxxxx,	xxxxxxx,	xxxxxxx,						xxxxxxx),
+		xxxxxxx,	xxxxxxx,	xxxxxxx,						AU_TOG)
 
 
 };
@@ -124,6 +237,8 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 int last_keystroke = 0;
 bool layer_not_default = false;
 
+#define COLOR_ORANGE_HSV 25, 255, 255
+
 void matrix_init_user(void) {
 	//rgblight_init();
 	rgblight_enable();
@@ -133,7 +248,7 @@ void matrix_init_user(void) {
 void matrix_scan_user(void) {
 	if (layer_not_default && timer_elapsed(last_keystroke) > 60000) {
 		layer_not_default = false;
-		rgblight_setrgb (COLOR_BLUE_RGB);
+		//rgblight_setrgb (COLOR_BLUE_RGB);
 		layer_move(0);
 	}
 }
@@ -210,6 +325,60 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_UP(X_LALT) SS_UP(X_LCTRL));
 			return false;
 			break;
+		case A_LP_NUMB: PLAY_SONG(a_lp_numb); return false; break;
+		case A_ODE_TO_JOY: PLAY_SONG(a_ode_to_joy); return false; break;
+		case A_ROCK_A_BYE_BABY: PLAY_SONG(a_rock_a_bye_bab); return false; break;
+		case A_CLOSE_ENCOUNTERS_5_NOTE: PLAY_SONG(a_close_encounters_5_not); return false; break;
+		case A_DOE_A_DEER: PLAY_SONG(a_doe_a_deer); return false; break;
+		case A_IN_LIKE_FLINT: PLAY_SONG(a_in_like_flint); return false; break;
+		case A_IMPERIAL_MARCH: PLAY_SONG(a_imperial_march); return false; break;
+		case A_CLUEBOARD_SOUND: PLAY_SONG(a_clueboard_sound); return false; break;
+		case A_BASKET_CASE: PLAY_SONG(a_basket_case); return false; break;
+		case A_STARTUP_SOUND: PLAY_SONG(a_startup_song); return false; break;
+		case A_GOODBYE_SOUND: PLAY_SONG(a_goodbye_sound); return false; break;
+		case A_PLANCK_SOUND: PLAY_SONG(a_planck_sound); return false; break;
+		case A_QWERTY_SOUND: PLAY_SONG(a_qwerty_sound); return false; break;
+		case A_COLEMAK_SOUND: PLAY_SONG(a_colemak_sound); return false; break;
+		case A_DVORAK_SOUND: PLAY_SONG(a_dvorak_sound); return false; break;
+		case A_PLOVER_SOUND: PLAY_SONG(a_plover_sound); return false; break;
+		case A_PLOVER_GOODBYE_SOUND: PLAY_SONG(a_plover_goodbye_sound); return false; break;
+		case A_MUSIC_ON_SOUND: PLAY_SONG(a_music_on_sound); return false; break;
+		case A_AUDIO_ON_SOUND: PLAY_SONG(a_audio_on_sound); return false; break;
+		case A_AUDIO_OFF_SOUND: PLAY_SONG(a_audio_off_sound); return false; break;
+		case A_MUSIC_OFF_SOUND: PLAY_SONG(a_music_off_sound); return false; break;
+		case A_CHROMATIC_SOUND: PLAY_SONG(a_dhromatic_sound); return false; break;
+		case A_MAJOR_SOUND: PLAY_SONG(a_major_sound); return false; break;
+		case A_MINOR_SOUND: PLAY_SONG(a_minor_sound); return false; break;
+		case A_GUITAR_SOUND: PLAY_SONG(a_guitar_sound); return false; break;
+		case A_VIOLIN_SOUND: PLAY_SONG(a_violin_sound); return false; break;
+		case A_CAPS_LOCK_ON_SOUND: PLAY_SONG(a_caps_lock_on_sound); return false; break;
+		case A_CAPS_LOCK_OFF_SOUND: PLAY_SONG(a_caps_lock_off_sound); return false; break;
+		case A_SCROLL_LOCK_ON_SOUND: PLAY_SONG(a_scroll_lock_on_sound); return false; break;
+		case A_SCROLL_LOCK_OFF_SOUND: PLAY_SONG(a_scroll_lock_off_sound); return false; break;
+		case A_NUM_LOCK_ON_SOUND: PLAY_SONG(a_num_lock_on_sound); return false; break;
+		case A_NUM_LOCK_OFF_SOUND: PLAY_SONG(a_num_lock_off_sound); return false; break;
+		case A_AG_NORM_SOUND: PLAY_SONG(a_ag_norm_sound); return false; break;
+		case A_AG_SWAP_SOUND: PLAY_SONG(a_ag_swap_sound); return false; break;
+		case A_UNICODE_WINDOWS: PLAY_SONG(a_unicode_windows); return false; break;
+		case A_UNICODE_LINUX: PLAY_SONG(a_unicode_linux); return false; break;
+		case A_COIN_SOUND: PLAY_SONG(a_coin_sound); return false; break;
+		case A_ONE_UP_SOUND: PLAY_SONG(a_one_up_sound); return false; break;
+		case A_SONIC_RING: PLAY_SONG(a_sonic_ring); return false; break;
+		case A_ZELDA_PUZZLE: PLAY_SONG(a_zelda_puzzle); return false; break;
+		case A_ZELDA_TREASURE: PLAY_SONG(a_zelda_treasure); return false; break;
+		case A_TERMINAL_SOUND: PLAY_SONG(a_terminal_sound); return false; break;
+		case A_OVERWATCH_THEME: PLAY_SONG(a_overwatch_theme); return false; break;
+		case A_MARIO_THEME: PLAY_SONG(a_mario_theme); return false; break;
+		case A_MARIO_GAMEOVER: PLAY_SONG(a_mario_gameover); return false; break;
+		case A_MARIO_MUSHROOM: PLAY_SONG(a_mario_mushroom); return false; break;
+		case A_E1M1_DOOM: PLAY_SONG(a_e1m1_doom); return false; break;
+		case A_DISNEY_SONG: PLAY_SONG(a_disney_song); return false; break;
+		case A_NUMBER_ONE: PLAY_SONG(a_number_one); return false; break;
+		case A_CABBAGE_SONG: PLAY_SONG(a_cabbage_song); return false; break;
+		case A_OLD_SPICE: PLAY_SONG(a_old_spicei); return false; break;
+		case A_VICTORY_FANFARE_SHORT: PLAY_SONG(a_victory_fanfare_short); return false; break;
+		case A_ALL_STAR: PLAY_SONG(a_all_star); return false; break;
+		case A_VOICE_CHANGE_SOUND: PLAY_SONG(a_voice_change_sound); return false; break;
     }
     return true;
 }
@@ -217,7 +386,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
 #define COLOR_BLUE_HSV 240, 255, 255
 #define COLOR_ORANGE_RGB 0xFF, 0x30, 0x00
-#define COLOR_ORANGE_HSV 25, 255, 255
 #define COLOR_TURQUOISE_RGB 0x00, 0xF4, 0xFF
 #define COLOR_PINK_RGB 0xFF, 0x00, 0xFF
 #define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
