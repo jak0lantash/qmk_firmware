@@ -56,4 +56,8 @@
 #define RGBLIGHT_VAL_STEP 8
 #endif
 
+#ifdef AUDIO_ENABLE
+#define C6_AUDIO
+#endif
+
 #endif

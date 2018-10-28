@@ -38,6 +38,9 @@ enum custom_keycodes {
 	M_LOCK,
 	M_WMP,
 	M_TCPDUMP,
+	M_HELP,
+	M_PIPE,
+	M_USCORE,
 	A_LP_NUMB,
 	A_CLOSE_ENCOUNTERS_5_NOTE,
 	A_IMPERIAL_MARCH,
@@ -139,43 +142,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		MOL_SETUP, 			LGUI(KC_L),	KC_NO, 		KC_NO, 		LGUI(KC_P6), 	LCTL(LALT(KC_P0)), 
 		LCTL(KC_F4), 	M(0), 		M(1), 		LCTL(KC_C), 	LCTL(KC_V), 	KC_N, 		LSFT(KC_N), 
 		LCTL(KC_F1), 		LCTL(KC_F2), 	LCTL(KC_F3), 	LCTL(KC_F6), 	LCTL(KC_F7), 	LCTL(KC_F8), 
-			LGUI(KC_P1),		KC_SPC, 	KC_SPC, 	KC_SPC, 	KC_SPC, 	KC_SPC, 
-		KC_SPC, 	KC_SPC, 	KC_SPC, 						KC_NO),
+			LGUI(KC_P1),		LGUI(KC_P2), 	LGUI(KC_P3), 	LGUI(KC_P4), 	LGUI(KC_P5), 	LGUI(KC_P6), 
+		LCTL(LALT(KC_D)), LCTL(KC_F5), 	LCTL(LALT(KC_F12)), 						LCTL(LALT(KC_C))),
 
 	[LAYER_SETUP] = KEYMAP(
 		_______,			TGL_TESTER,	TOL_SWMACROS,	TOL_HWMACROS,	TOL_AUDIO,	xxxxxxx,
-		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		AU_TOG,		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		RGB_M_SW,		RGB_HUI,	RGB_SAI,	RGB_VAI,	xxxxxxx,	xxxxxxx,
 			RGB_M_P,		RGB_HUD,	RGB_SAD,	RGB_VAD,	xxxxxxx,	xxxxxxx,
-		RGB_TOG,	RGB_MOD,	RGB_RMOD,						RESET),
+		RGB_TOG,	RGB_MOD,	RGB_RMOD,							RESET),
 
 	[LAYER_HW_MACROS] = KEYMAP(
 		_______,			M_LOCK,		_______,	_______,	M_WMP,		M_REPLACE,
-		M_TCPDUMP,	_______,	_______,	_______,	_______,	_______,	_______,
+		M_TCPDUMP,	M_PIPE,		M_USCORE,	KC_COPY,	KC_PASTE,	_______,	_______,
 		M_VCENTER,		M_STE,		M_VMWARE,	M_HJVMWARE,	M_HJ,		M_JHGMAIL,
-			M_OUTLOOK,		M_MREMOTENG,	M_NOTEPAD,	M_CHROME,	M_PHRASEXPR,	_______,
-		M_CDSR,		_______,	M_WAITCST,						M_SCOPY),
+			M_OUTLOOK,		M_MREMOTENG,	M_NOTEPAD,	M_CHROME,	M_PHRASEXPR,	M_WMP,
+		M_CDSR,		M_WAITCST,	M_HELP,								M_SCOPY),
 
 	[LAYER_TESTER] = KEYMAP(
 		MOL_TST_BK,			xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		xxxxxxx,		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 			xxxxxxx,		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		xxxxxxx,	xxxxxxx,	xxxxxxx,						xxxxxxx),
+		xxxxxxx,	xxxxxxx,	xxxxxxx,							xxxxxxx),
 
 	[LAYER_TESTER_BACK] = KEYMAP(
 		_______,			_______,	_______,	_______,	_______,	_______,
 		_______,	_______,	_______,	_______,	_______,	_______,	_______,
 		_______,		_______,	_______,	_______,	_______,	_______,
 			_______,		_______,	_______,	_______,	_______,	_______,
-		_______,	_______,	_______,						TGL_TESTER),
+		_______,	_______,	_______,							TGL_TESTER),
 	
 	[LAYER_AUDIO] = KEYMAP(
 		_______,			_______,	_______,	_______,	_______,	_______,
 		A_LP_NUMB,	A_CLOSE_ENCOUNTERS_5_NOTE,	A_IMPERIAL_MARCH,	A_STARTUP_SOUND,	A_GOODBYE_SOUND,	A_PLANCK_SOUND,	A_QWERTY_SOUND,
 		A_COLEMAK_SOUND,	A_DVORAK_SOUND,	A_PLOVER_SOUND,	A_PLOVER_GOODBYE_SOUND,	A_UNICODE_WINDOWS,	A_COIN_SOUND,
 		A_MARIO_MUSHROOM,	A_MARIO_THEME,	A_MARIO_THEME_FULL,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		xxxxxxx,	xxxxxxx,	xxxxxxx,						AU_TOG)
+		xxxxxxx,	xxxxxxx,	xxxxxxx,							AU_TOG)
 
 };
 
@@ -268,6 +271,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case M_WMP:
 			SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_KP_6) SS_UP(X_LGUI));
 			return false; break;
+		case M_HELP:
+			SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_LALT) SS_TAP(X_F12) SS_UP(X_LALT) SS_UP(X_LCTRL));
+			return false; break;
 		case M_REPLACE:
 			SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_UP(X_LALT) SS_UP(X_LCTRL));
 			return false; break;
@@ -306,6 +312,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 		case LAYER_SW_MACROS:
 			rgblight_sethsv (COLOR_ORANGE_HSV);
 			layer_not_default = false;
+			PLAY_SONG(a_planck_sound);
 			break;
 		case LAYER_SETUP:
 			rgblight_setrgb (COLOR_RED_RGB);
@@ -314,11 +321,13 @@ uint32_t layer_state_set_user(uint32_t state) {
 		case LAYER_HW_MACROS:
 			rgblight_setrgb (COLOR_GREEN_RGB);
 			layer_not_default = true;
+			PLAY_SONG(a_colemak_sound);
 			break;
 		case LAYER_TESTER:
 		case LAYER_TESTER_BACK:
 			rgblight_setrgb (COLOR_TURQUOISE_RGB);
 			layer_not_default = true;
+			PLAY_SONG(a_plover_sound);
 			break;
 		case LAYER_AUDIO:
 			rgblight_setrgb (COLOR_BLUE_RGB);
