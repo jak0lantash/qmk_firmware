@@ -191,7 +191,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 			break;
 		case 1:
 			if (record->event.pressed) {
-				return MACRO( D(LALT), D(P9), D(P5), U(P9), U(P5), U(LALT), END );
+				return MACRO( D(LALT), T(P9), T(P5), U(LALT), END );
 			}
 			break;
 	}
@@ -276,6 +276,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			return false; break;
 		case M_REPLACE:
 			SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_UP(X_LALT) SS_UP(X_LCTRL));
+			return false; break;
+		case M_PIPE:
+			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_1) SS_TAP(X_KP_2) SS_TAP(X_KP_4) SS_UP(X_LALT));
+			return false; break;
+		case M_USCORE:
+			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_5) SS_UP(X_LALT));
 			return false; break;
 		case A_LP_NUMB: 		PLAY_SONG(a_lp_numb); 			return false; break;
 		case A_CLOSE_ENCOUNTERS_5_NOTE: PLAY_SONG(a_close_encounters_5_note);	return false; break;
