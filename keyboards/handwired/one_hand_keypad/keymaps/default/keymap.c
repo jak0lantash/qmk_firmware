@@ -69,6 +69,7 @@ enum custom_keycodes {
 		W__NOTE(_G5), \
 		Q__NOTE(_G4), \
 		WD_NOTE(_REST), \
+		H__NOTE(_REST), \
 		\
 		HD_NOTE(_C5), \
 		HD_NOTE(_G4), \
@@ -86,7 +87,7 @@ enum custom_keycodes {
 		H__NOTE(_G5), \
 		Q__NOTE(_C5), \
 		Q__NOTE(_D5), \
-		Q__NOTE(_B4), \
+		HD_NOTE(_B4), \
 		Q__NOTE(_REST), \
 		\
 		HD_NOTE(_C5), \
@@ -105,7 +106,7 @@ enum custom_keycodes {
 		H__NOTE(_G5), \
 		Q__NOTE(_C5), \
 		Q__NOTE(_D5), \
-		Q__NOTE(_B4), \
+		HD_NOTE(_B4), \
 		WD_NOTE(_REST), \
 		\
 		Q__NOTE(_E5), \
