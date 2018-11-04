@@ -28,7 +28,8 @@
 #define MOL_TST_BK MO(LAYER_TESTER_BACK)
 
 enum custom_keycodes {
-	M_CREDSSP = SAFE_RANGE
+	M_CREDSSP = SAFE_RANGE,
+	M_EMEA
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -72,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,	_______,	_______,
 		_______,	_______,	_______,	_______,
 		_______,	_______,	_______,
-		_______,	M(12),				_______),
+		_______,	M(12),				M_EMEA),
 
 	[LAYER_MACROS] = KEYMAP(
 		_______,	_______,	_______,	_______,
@@ -188,6 +189,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	if (record->event.pressed) switch (keycode) {
 		case M_CREDSSP:
 			SEND_STRING("REG ADD HKLM" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Software" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Microsoft" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Windows" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "CurrentVersion" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Policies" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "System" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "CredSSP" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) "Parameters" SS_DOWN(X_LALT) SS_TAP(X_KP_9) SS_TAP(X_KP_2) SS_UP(X_LALT) " " SS_DOWN(X_LALT) SS_TAP(X_KP_4) SS_TAP(X_KP_7) SS_UP(X_LALT) "v AllowEncryptionOracle " SS_DOWN(X_LALT) SS_TAP(X_KP_4) SS_TAP(X_KP_7) SS_UP(X_LALT) "t REG_DWORD " SS_DOWN(X_LALT) SS_TAP(X_KP_4) SS_TAP(X_KP_7) SS_UP(X_LALT) "d 2");
+			return false;
+			break;
+		case M_EMEA:
+			SEND_STRING("EMEA");
 			return false;
 			break;
 	}
