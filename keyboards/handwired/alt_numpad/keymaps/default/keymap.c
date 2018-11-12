@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		MOL_SETUP,	_______,	_______, 	TOL_NUMPAD, 
 		KC_INS, 	KC_HOME, 	KC_PGUP, 	KC_SLSH, 
 		KC_DEL, 	KC_END, 	KC_PGDN, 
-		KC_NO, 		KC_UP, 		KC_NO, 		KC_RGUI, 
+		KC_PSCR,	KC_UP, 		KC_SLCK,	KC_RGUI, 
 		KC_LEFT, 	KC_DOWN, 	KC_RGHT, 
 		KC_LCTL, 	KC_LSFT, 			KC_ENT),
 	
