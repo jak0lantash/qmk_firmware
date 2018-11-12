@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[LAYER_SW_MACROS] = KEYMAP(
 		//_______,	________,	________,	________,	________,	________,	_______,
-		MOL_SETUP, 			LGUI(KC_L),	KC_NO, 		KC_NO, 		LGUI(KC_P6), 	LCTL(LALT(KC_P0)), 
+		MOL_SETUP, 			LGUI(KC_L),	KC_NO, 		KC_SLCK,	LGUI(KC_P6), 	LCTL(LALT(KC_P0)), 
 		LCTL(KC_F4), 	M(0), 		M(1), 		LCTL(KC_C), 	LCTL(KC_V), 	KC_N, 		LSFT(KC_N), 
 		LCTL(KC_F1), 		LCTL(KC_F2), 	LCTL(KC_F3), 	LCTL(KC_F6), 	LCTL(KC_F7), 	LCTL(KC_F8), 
 			LGUI(KC_P1),		LGUI(KC_P2), 	LGUI(KC_P3), 	LGUI(KC_P4), 	LGUI(KC_P5), 	LGUI(KC_P6), 
