@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,	M(12),				M_EMEA),
 
 	[LAYER_MACROS] = KEYMAP(
-		_______,	_______,	_______,	_______,
+		_______,	_______,	_______,	TOL_NUMPAD,
 		KC_BSPC,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		M_CREDSSP,	xxxxxxx,	xxxxxxx,
 		M(4),		M(0),		M(5),		xxxxxxx,
