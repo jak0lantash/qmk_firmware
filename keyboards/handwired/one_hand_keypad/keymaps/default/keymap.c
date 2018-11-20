@@ -29,6 +29,7 @@ enum custom_keycodes {
 	M_PHRASEXPR,
 	M_VCENTER,
 	M_STE,
+	M_FSTE,
 	M_VMWARE,
 	M_HJVMWARE,
 	M_HJ,
@@ -141,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[LAYER_SW_MACROS] = KEYMAP(
 		//_______,	________,	________,	________,	________,	________,	_______,
 		MOL_SETUP, 			LGUI(KC_L),	KC_NO, 		KC_SLCK,	LGUI(KC_P6), 	LCTL(LALT(KC_P0)), 
-		LCTL(KC_F4), 	M(0), 		M(1), 		LCTL(KC_C), 	LCTL(KC_V), 	KC_N, 		LSFT(KC_N), 
+		LCTL(KC_F4), 	M(0), 		LCTL(KC_F9),	LCTL(KC_C), 	LCTL(KC_V), 	KC_N, 		LSFT(KC_N), 
 		LCTL(KC_F1), 		LCTL(KC_F2), 	LCTL(KC_F3), 	LCTL(KC_F6), 	LCTL(KC_F7), 	LCTL(KC_F8), 
 			LGUI(KC_P1),		LGUI(KC_P2), 	LGUI(KC_P3), 	LGUI(KC_P4), 	LGUI(KC_P5), 	LGUI(KC_P6), 
 		LCTL(LALT(KC_D)), LCTL(KC_F5), 	LCTL(LALT(KC_F12)), 						LCTL(LALT(KC_C))),
@@ -155,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[LAYER_HW_MACROS] = KEYMAP(
 		_______,			M_LOCK,		_______,	_______,	M_WMP,		M_REPLACE,
-		M_TCPDUMP,	M_PIPE,		M_USCORE,	KC_COPY,	KC_PASTE,	_______,	_______,
+		M_TCPDUMP,	M_PIPE,		M_FSTE,		KC_COPY,	KC_PASTE,	_______,	_______,
 		M_VCENTER,		M_STE,		M_VMWARE,	M_HJVMWARE,	M_HJ,		M_JHGMAIL,
 			M_OUTLOOK,		M_MREMOTENG,	M_NOTEPAD,	M_CHROME,	M_PHRASEXPR,	M_WMP,
 		M_CDSR,		M_WAITCST,	M_HELP,								M_SCOPY),
@@ -241,6 +242,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case M_STE:
 			SEND_STRING("IAmOnThePhoneWithTechSupport" SS_TAP(X_ENTER));
 			//SEND_STRING(SS_DOWN(X_LCTRL) SS_TAP(X_F2) SS_UP(X_LCTRL));
+			return false; break;
+		case M_FSTE:
+			SEND_STRING("enable" SS_TAP(X_ENTER));
+			_delay_ms(500);
+			SEND_STRING("VMware1!" SS_TAP(X_ENTER));
+			_delay_ms(500);
+			SEND_STRING("st e" SS_TAP(X_ENTER));
+			_delay_ms(500);
+			SEND_STRING("y" SS_TAP(X_ENTER));
+			_delay_ms(500);
+			SEND_STRING("IAmOnThePhoneWithTechSupport" SS_TAP(X_ENTER));
 			return false; break;
 		case M_VMWARE:
 			SEND_STRING("VMware1!");
