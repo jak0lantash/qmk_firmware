@@ -1,9 +1,10 @@
 #include "sweet16.h"
 
-#define LAYER_MACROS 0
-#define LAYER_SETUP 1
-#define LAYER_BLANK 2
-#define LAYER_BLANK_BACK 3
+#define LAYER_NUMPAD 0
+#define LAYER_MACROS 1
+#define LAYER_SETUP 2
+#define LAYER_BLANK 3
+#define LAYER_BLANK_BACK 4
 
 enum custom_keycodes {
 	M_CDSR = SAFE_RANGE,
@@ -27,21 +28,34 @@ enum custom_keycodes {
 #define _______ KC_TRNS
 #define xxxxxxx KC_NO
 
+#define LT_SETUP LT(LAYER_SETUP, KC_BSPC)
+#define MO_SETUP MO(LAYER_SETUP)
+#define TG_TESTER TG(LAYER_BLANK)
+#define MO_BACK MO(LAYER_BLANK_BACK)
+#define TG_NUMPAD TG(LAYER_NUMPAD)
+#define TG_MACROS TG(LAYER_MACROS)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+	[LAYER_NUMPAD] = LAYOUT_ortho_4x4(
+		LT_SETUP,	KC_PSLS,	KC_PAST,	KC_PMNS,
+		KC_KP_7,	KC_KP_8,	KC_KP_9,	KC_PPLS,
+		KC_KP_4,	KC_KP_5,	KC_KP_6,	KC_PENT,
+		KC_KP_1,	KC_KP_2,	KC_KP_3,	KC_KP_0),
+
 	[LAYER_MACROS] = LAYOUT_ortho_4x4(
-		MO(1),		M_TCPDUMP,	M_WMP,		M_REPLACE,
+		MO_SETUP,	M_TCPDUMP,	M_WMP,		M_REPLACE,
 		M_HJVMWARE,	M_HJ,		M_JHGMAIL,	M_WAITCST,
 		M_VCENTER,	M_STE,		M_VMWARE,	M_CDSR,
 		M_OUTLOOK,	M_MREMOTENG,	M_NOTEPAD,	M_SCOPY),
 
 	[LAYER_SETUP] = LAYOUT_ortho_4x4(
-		_______,	TG(2),		_______,	RGB_M_R,
+		_______,	TG_TESTER,	TG_NUMPAD,	TG_MACROS,
 		RGB_HUI,	RGB_SAI,	RGB_VAI,	RGB_M_SW,
 		RGB_HUD,	RGB_SAD,	RGB_VAD,	RGB_M_P,
 		RGB_TOG,	RGB_MOD,	RGB_RMOD,	RESET),
 
 	[LAYER_BLANK] = LAYOUT_ortho_4x4(
-		MO(3),		xxxxxxx,	xxxxxxx,	xxxxxxx,
+		MO_BACK,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
 		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx),
@@ -50,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,	_______,	_______,	_______,
 		_______,	_______,	_______,	_______,
 		_______,	_______,	_______,	_______,
-		_______,	_______,	_______,	TG(2))
+		_______,	_______,	_______,	TG_TESTER)
 };
 
 #define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
@@ -158,8 +172,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 uint32_t layer_state_set_user(uint32_t state) {
 	switch (biton32(state)) {
-		case LAYER_MACROS:
+		case LAYER_NUMPAD:
 			rgblight_sethsv (COLOR_ORANGE_HSV);
+			break;
+		case LAYER_MACROS:
+			rgblight_setrgb (COLOR_BLUE_RGB);
 			break;
 		case LAYER_SETUP:
 			rgblight_setrgb (COLOR_RED_RGB);
