@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[LAYER_MACROS] = KEYMAP(
 		_______,	_______,	_______,	TOL_NUMPAD,
 		KC_BSPC,	xxxxxxx,	xxxxxxx,	xxxxxxx,
-		M_CREDSSP,	xxxxxxx,	xxxxxxx,
+		M_CREDSSP,	M(13),		xxxxxxx,
 		M(4),		M(0),		M(5),		xxxxxxx,
 		M(2),		M(3),		xxxxxxx,
 		KC_CALC,	_______,			xxxxxxx),
@@ -179,6 +179,12 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 		case 6:
 			if (record->event.pressed) 
 				backlight_step();
+			break;
+		case 13:
+			if (record->event.pressed)
+				return MACRO(
+					D(LGUI), T(P7), U(LGUI),
+				END );
 			break;
 			
 	}
