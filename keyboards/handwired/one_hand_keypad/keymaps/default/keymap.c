@@ -216,6 +216,7 @@ void matrix_scan_user(void) {
 		layer_not_default = false;
 		//rgblight_setrgb (COLOR_BLUE_RGB);
 		layer_move(0);
+		PLAY_SONG(a_colemak_sound);
 	}
 }
 
@@ -331,7 +332,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 		case LAYER_SW_MACROS:
 			rgblight_sethsv (COLOR_ORANGE_HSV);
 			layer_not_default = false;
-			PLAY_SONG(a_planck_sound);
+			//PLAY_SONG(a_planck_sound);
 			break;
 		case LAYER_SETUP:
 			rgblight_setrgb (COLOR_RED_RGB);
@@ -340,13 +341,13 @@ uint32_t layer_state_set_user(uint32_t state) {
 		case LAYER_HW_MACROS:
 			rgblight_setrgb (COLOR_GREEN_RGB);
 			layer_not_default = true;
-			PLAY_SONG(a_colemak_sound);
+			//PLAY_SONG(a_colemak_sound);
 			break;
 		case LAYER_TESTER:
 		case LAYER_TESTER_BACK:
 			rgblight_setrgb (COLOR_TURQUOISE_RGB);
 			layer_not_default = true;
-			PLAY_SONG(a_plover_sound);
+			//PLAY_SONG(a_plover_sound);
 			break;
 		case LAYER_AUDIO:
 			rgblight_setrgb (COLOR_BLUE_RGB);
