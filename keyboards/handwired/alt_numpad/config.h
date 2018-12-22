@@ -25,6 +25,7 @@
 
 /* number of backlight levels */
 
+#define BACKLIGHT_PIN D0
 #ifdef BACKLIGHT_PIN
 #define BACKLIGHT_LEVELS 3
 #endif

@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[LAYER_SETUP] = KEYMAP(
 		_______, 	TGL_TESTER, 	xxxxxxx, 	RESET, 
 		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
-		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
+		BL_TOGG, 	BL_STEP,	BL_BRTG, 
 		RGB_HUI, 	RGB_SAI, 	RGB_VAI, 	xxxxxxx, 
 		RGB_HUD, 	RGB_SAD, 	RGB_VAD, 
 		RGB_TOG, 	RGB_MOD, 			RGB_MODE_PLAIN),
@@ -176,6 +176,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 				END );
 			}
 			break;
+		case 6:
+			if (record->event.pressed) 
+				backlight_step();
+			break;
+			
 	}
 	return MACRO_NONE;
 }
@@ -215,6 +220,7 @@ void matrix_init_user(void) {
 	//rgblight_init();
 	rgblight_enable();
 	rgblight_sethsv (COLOR_ORANGE_HSV);
+	//breathing_toggle();
 }
 
 /*uint32_t default_layer_state_set_kb(uint32_t state) {
