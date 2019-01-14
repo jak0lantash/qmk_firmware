@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 	[LAYER_ACCENTS] = LAYOUT_JK0(
 		M_GRAVE, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
-		M_GRAVE3, M_ACIRC, M_EACCU, M_EGRAV, ____, ____, M_YUML, M_UCIRC, M_ICIRC, M_OCIRC, M_OELIG, ____, ____, ____,
+		M_GRAVE3, M_ACIRC, M_EACCU, M_EGRAV, M_ECIRC, ____, M_YUML, M_UCIRC, M_ICIRC, M_OCIRC, M_OELIG, ____, ____, ____,
 		____, M_AGRAV, M_AUML, M_EUML, ____, ____, M_UGRAV, M_UUML, M_IUML, M_OUML, ____, ____, ____,
 		____, ____, ____, M_AELIG, M_CCEDL, ____, ____, ____, ____, ____, ____, ____, ____, ____,
 		____, ____, ____, ____, ____, ____, ____, ____, ____, ____
