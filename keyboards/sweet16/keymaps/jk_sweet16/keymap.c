@@ -2,10 +2,11 @@
 
 #define LAYER_NUMPAD 0
 #define LAYER_MACROS 1
-#define LAYER_SETUP 3
-#define LAYER_BLANK 4
-#define LAYER_BLANK_BACK 5
+#define LAYER_SETUP 4
+#define LAYER_BLANK 5
+#define LAYER_BLANK_BACK 6
 #define LAYER_SKYRIM 2
+#define LAYER_BROWSER 3
 
 enum custom_keycodes {
 	M_CDSR = SAFE_RANGE,
@@ -37,6 +38,7 @@ enum custom_keycodes {
 #define TG_MACROS TG(LAYER_MACROS)
 #define TG_SKYRIM TG(LAYER_SKYRIM)
 #define LT_SKYSTP LT(LAYER_SETUP, KC_TAB)
+#define TG_BROWSER TG(LAYER_BROWSER)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[LAYER_NUMPAD] = LAYOUT_ortho_4x4(
@@ -54,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[LAYER_SETUP] = LAYOUT_ortho_4x4(
 		_______,	TG_TESTER,	TG_NUMPAD,	TG_MACROS,
 		RGB_HUI,	RGB_SAI,	RGB_VAI,	TG_SKYRIM,
-		RGB_HUD,	RGB_SAD,	RGB_VAD,	RGB_M_P,
+		RGB_HUD,	RGB_SAD,	RGB_VAD,	TG_BROWSER,
 		RGB_TOG,	RGB_MOD,	RGB_RMOD,	RESET),
 
 	[LAYER_BLANK] = LAYOUT_ortho_4x4(
@@ -73,7 +75,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		LT_SKYSTP,	KC_Q,		KC_W,		KC_E,
 		KC_CAPS,	KC_A,		KC_S,		KC_D,
 		KC_LSFT,	KC_Z,		KC_I,		KC_R,
-		KC_LCTL,	KC_LALT,	KC_M,		KC_SPC)
+		KC_LCTL,	KC_LALT,	KC_M,		KC_SPC),
+	
+	[LAYER_BROWSER] = LAYOUT_ortho_4x4(
+		MO_SETUP,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	xxxxxxx,	xxxxxxx,
+		xxxxxxx,	xxxxxxx,	LCTL(KC_W),	LCTL(KC_PGDN))
 };
 
 #define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
@@ -197,6 +205,9 @@ uint32_t layer_state_set_user(uint32_t state) {
 			break;
 		case LAYER_SKYRIM:
 			rgblight_setrgb (COLOR_SKYRIM);
+			break;
+		case LAYER_BROWSER:
+			rgblight_setrgb (COLOR_PINK_RGB);
 			break;
 	}
 	return state;
