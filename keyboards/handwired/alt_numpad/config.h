@@ -7,7 +7,7 @@
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x6067
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    jk
+#define MANUFACTURER    j0
 #define PRODUCT         numpad
 #define DESCRIPTION     alt_numpad
 
