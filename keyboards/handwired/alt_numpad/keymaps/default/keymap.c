@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[LAYER_SETUP] = KEYMAP(
 		_______, 	TGL_TESTER, 	xxxxxxx, 	RESET, 
-		xxxxxxx, 	xxxxxxx, 	xxxxxxx, 	xxxxxxx, 
+		xxxxxxx, 	KC_CLCK, 	KC_SLCK, 	KC_NLCK, 
 		BL_TOGG, 	BL_STEP,	BL_BRTG, 
 		RGB_HUI, 	RGB_SAI, 	RGB_VAI, 	xxxxxxx, 
 		RGB_HUD, 	RGB_SAD, 	RGB_VAD, 
