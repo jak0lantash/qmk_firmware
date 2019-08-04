@@ -7,11 +7,12 @@
 #define LAYER_NUMBERS 1
 #define LAYER_CONSOLE 2
 #define LAYER_NAV_CLUSTER 3
-#define LAYER_SETUP 6
+#define LAYER_SETUP 7
 #define LAYER_ISO 4
 #define LAYER_MACROS 5
-#define LAYER_TESTER 7
-#define LAYER_TESTER_BACK 8
+#define LAYER_CTALT 6
+#define LAYER_TESTER 8
+#define LAYER_TESTER_BACK 9
 
 #define _______ KC_TRNS
 #define xxxxxxx KC_NO
@@ -22,6 +23,7 @@
 #define TGL_ISO TG(LAYER_ISO)
 #define MOL_SETUP MO(LAYER_SETUP)
 #define LTL_MACROS LT(LAYER_MACROS, KC_PDOT)
+//#define LM_CTALT LM(LAYER_CTALT, MOD_LCTL | MOD_LALT)
 #define TOL_MACROS TO(LAYER_MACROS)
 #define ALT_PENT ALT_T(KC_PENT)
 #define WIN_PSLS LGUI_T(KC_PSLS)
@@ -42,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_P7,  	KC_P8, 		KC_P9, 
 		KC_P4,  	KC_P5, 		KC_P6, 		KC_PPLS, 
 		KC_P1,  	KC_P2, 		KC_P3, 
-		KC_P0,  	LTL_MACROS,			ALT_PENT),
+		LCA_T(KC_P0),  	LTL_MACROS,			ALT_PENT),
 
 	[LAYER_NUMBERS] = KEYMAP(
 		_______, 	_______, 	_______, 	TOL_NUMPAD, 
@@ -67,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_DEL, 	KC_END, 	KC_PGDN, 
 		KC_PSCR,	KC_UP, 		KC_SLCK,	KC_RGUI, 
 		KC_LEFT, 	KC_DOWN, 	KC_RGHT, 
-		KC_LCTL, 	KC_LSFT, 			KC_ENT),
+		KC_LCTL, 	KC_LSFT, 			KC_LALT),
 	
 	[LAYER_ISO] = KEYMAP(
 		_______,	_______,	_______,	_______,
@@ -85,6 +87,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		M(2),		M(3),		xxxxxxx,
 		KC_CALC,	_______,			xxxxxxx),
 
+/*	[LAYER_CTALT] = KEYMAP(
+		_______,	_______,	_______,	_______, 
+		_______,	_______,	_______,	_______, 
+		KC_P7,  	KC_P8, 		KC_P9, 
+		KC_P4,  	KC_P5, 		KC_P6, 		_______, 
+		KC_P1,  	KC_P2, 		KC_P3, 
+		KC_P0,  	_______,			_______),
+*/
 	[LAYER_SETUP] = KEYMAP(
 		_______, 	TGL_TESTER, 	xxxxxxx, 	RESET, 
 		xxxxxxx, 	KC_CLCK, 	KC_SLCK, 	KC_NLCK, 
@@ -223,6 +233,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define COLOR_RED_RGB 0xFF, 0x00, 0x00
 #define COLOR_YELLOW_RGB 0xFF, 0xFF, 0x00
 #define COLOR_PURPLE_RGB 0xFF, 0x00, 0x80
+#define COLOR_WHITE_RGB 0xFF, 0xFF, 0xFF
 
 void matrix_init_user(void) {
 	//rgblight_init();
@@ -273,7 +284,11 @@ uint32_t layer_state_set_user(uint32_t state) {
 			rgblight_setrgb (COLOR_BLUE_RGB);
 			layer_not_default = false;
 			break;
-		case LAYER_TESTER:
+/*		case LAYER_CTALT:
+			rgblight_setrgb (COLOR_WHITE_RGB);
+			layer_not_default = false;
+			break;
+*/		case LAYER_TESTER:
 		case LAYER_TESTER_BACK:
 			rgblight_setrgb (COLOR_TURQUOISE_RGB);
 			layer_not_default = false;
