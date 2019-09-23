@@ -30,6 +30,7 @@ enum custom_keycodes {
 	M_GRAVE3,
 	M_ACIRC,
 	M_AGRAV,
+	M_AACCU,
 	M_AUML,
 	M_EGRAV,
 	M_EACCU,
@@ -67,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		M_GRAVE, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
 		M_GRAVE3, M_ACIRC, M_EGRAV, M_EACCU, M_ECIRC, ____, M_YUML, M_UCIRC, M_ICIRC, M_OCIRC, M_OELIG, ____, ____, ____,
 		____, M_AGRAV, M_AUML, M_EUML, ____, ____, M_UGRAV, M_UUML, M_IUML, M_OUML, ____, ____, ____,
-		____, ____, ____, M_AELIG, M_CCEDL, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+		____, M_AACCU, ____, M_AELIG, M_CCEDL, ____, ____, ____, ____, ____, ____, ____, ____, ____,
 		____, ____, ____, ____, ____, ____, ____, ____, ____, ____
 	),
 	[LAYER_FN] = LAYOUT_JK0(
@@ -160,6 +161,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			break;
 		case M_AGRAV: 
 			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_2) SS_TAP(X_KP_2) SS_TAP(X_KP_4) SS_UP(X_LALT));
+			return false;
+			break;
+		case M_AACCU:
+			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_2) SS_TAP(X_KP_2) SS_TAP(X_KP_5) SS_UP(X_LALT));
 			return false;
 			break;
 		case M_ACIRC: 
