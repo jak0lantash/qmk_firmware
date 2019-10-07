@@ -46,7 +46,8 @@ enum custom_keycodes {
 	M_IUML,
 	M_OCIRC,
 	M_OUML,
-	M_OELIG
+	M_OELIG,
+	M_EURO
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -65,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, FN, LSFT_T(KC_ENT), KC_RALT, KC_RGUI, KC_APP, KC_RCTL
 	),
 	[LAYER_ACCENTS] = LAYOUT_JK0(
-		M_GRAVE, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+		M_GRAVE, ____, ____, M_EURO, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
 		M_GRAVE3, M_ACIRC, M_EGRAV, M_EACCU, M_ECIRC, ____, M_YUML, M_UCIRC, M_ICIRC, M_OCIRC, M_OELIG, ____, ____, ____,
 		____, M_AGRAV, M_AUML, M_EUML, ____, ____, M_UGRAV, M_UUML, M_IUML, M_OUML, ____, ____, ____,
 		____, M_AACCU, ____, M_AELIG, M_CCEDL, ____, ____, ____, ____, ____, ____, ____, ____, ____,
@@ -233,6 +234,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			break;
 		case M_OELIG: 
 			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_5) SS_TAP(X_KP_6) SS_UP(X_LALT));
+			return false;
+			break;
+		case M_EURO: 
+			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_2) SS_TAP(X_KP_8) SS_UP(X_LALT));
 			return false;
 			break;
 	}
