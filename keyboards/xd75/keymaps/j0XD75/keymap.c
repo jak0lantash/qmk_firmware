@@ -60,7 +60,9 @@ enum custom_keycodes {
 	M_OUML,
 	M_OELIG,
 	M_ATILD,
-	M_EURO
+	M_EURO,
+	M_SNIP,
+	M_DIGITS
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -82,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [LAYER_QWERTY] = { /* QWERTY */
   { KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_EQL,  KC_NUHS, KC_MINS, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL   },
   { KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC, KC_PGUP, KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC  },
-  { KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    xxxxxxx, KC_PGDN, xxxxxxx, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT  },
+  { KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    M_SNIP,  KC_PGDN, M_DIGITS,KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT  },
   { KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_HOME, KC_UP,   KC_END,  KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH  },
   { KC_LCTL, KC_LGUI, KC_LALT, FN,      KC_SPC,  xxxxxxx, KC_LEFT, KC_DOWN, KC_RGHT, ACCENTS, xxxxxxx, KC_RALT, KC_CAPS, KC_LEFT, KC_RGHT  },
  },
@@ -296,6 +298,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			break;
 		case M_EURO: 
 			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_2) SS_TAP(X_KP_8) SS_UP(X_LALT));
+			return false;
+			break;
+		case M_SNIP:
+			SEND_STRING("[...]");
+			return false;
+			break;
+		case M_DIGITS:
+			SEND_STRING("[0-9]");
 			return false;
 			break;
 	}
