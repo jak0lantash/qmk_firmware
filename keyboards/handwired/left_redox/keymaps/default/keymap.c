@@ -3,8 +3,9 @@
 //#define xxxxxxx KC_NO
 //#define _______ KC_TRANS
 
-#define LAYER_GAME 0
-#define LAYER_MACROS 1
+#define LAYER_GAME 1
+#define LAYER_LEFT 0
+#define LAYER_MACROS 2
 #define LAYER_SETUP 5
 #define LAYER_TESTER 3
 #define LAYER_TESTER_BACK 4
@@ -12,6 +13,7 @@
 #define _______ KC_TRNS
 #define xxxxxxx KC_NO
 #define TOL_GAME TO(LAYER_GAME)
+#define TOL_LEFT TO(LAYER_LEFT)
 #define LTL_MACROS LT(LAYER_MACROS, KC_PGDN)
 #define LTL_SETUP LT(LAYER_SETUP, KC_ESC)
 #define MOL_SETUP MO(LAYER_SETUP)
@@ -29,6 +31,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		LTL_SETUP,	KC_1,		KC_2,		KC_3,		KC_4,		KC_5,
 		KC_TAB,		KC_T,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_BSPC,
 		KC_CAPS,	KC_G,		KC_A,		KC_S,		KC_D,		KC_F,		KC_ENT,
+		KC_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		KC_PAUS,	KC_PGUP,
+		KC_LCTL,	KC_LGUI,	KC_LALT,	KC_PSCR,		KC_SPC,			KC_SPC,		LTL_MACROS),
+
+	[LAYER_LEFT] = KEYMAP(
+		LTL_SETUP,	KC_1,		KC_2,		KC_3,		KC_4,		KC_5,
+		KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		KC_BSPC,
+		KC_BSPC,	KC_A,		KC_S,		KC_D,		KC_F,		KC_G,		KC_ENT,
 		KC_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		KC_PAUS,	KC_PGUP,
 		KC_LCTL,	KC_LGUI,	KC_LALT,	KC_PSCR,		KC_SPC,			KC_SPC,		LTL_MACROS),
 
@@ -54,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,	_______,	_______,	_______,		_______,		_______,	TGL_TESTER),
 
 	[LAYER_SETUP] = KEYMAP(
-		_______,	_______,	_______,	_______,	_______,	_______,
+		_______,	TOL_LEFT,	TOL_GAME,	_______,	_______,	_______,
 		KC_A,		_______,	_______,	_______,	_______,	_______,	_______,
 		_______,	_______,	_______,	_______,	_______,	_______,	_______,
 		_______,	_______,	_______,	_______,	_______,	_______,	_______,	TGL_TESTER,
@@ -107,6 +116,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 uint32_t layer_state_set_user(uint32_t state) {
 	switch (biton32(state)) {
 		case LAYER_GAME:
+			rgblight_sethsv (COLOR_BLUE_HSV);
+			layer_not_default = false;
+			//PLAY_SONG(a_planck_sound);
+			break;
+		case LAYER_LEFT:
 			rgblight_sethsv (COLOR_ORANGE_HSV);
 			layer_not_default = false;
 			//PLAY_SONG(a_planck_sound);
