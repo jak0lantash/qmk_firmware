@@ -37,6 +37,8 @@
 #define TGL_TESTER TG(LAYER_TESTER)
 #define MOL_TST_BK MO(LAYER_TESTER_BACK)
 
+#define SFT_CAPS RSFT_T(KC_CAPS)
+
 enum custom_keycodes {
 	M_GRAVE = SAFE_RANGE,
 	M_GRAVE3,
@@ -62,6 +64,7 @@ enum custom_keycodes {
 	M_ATILD,
 	M_EURO,
 	M_SNIP,
+	M_HELP,
 	M_DIGITS
 };
 
@@ -77,16 +80,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------------------------+--------|
  * | LSHIFT | \|     | Z      | X      | C      | V      | HOME   | UP     | END    | B      | N      | M      | ,<     | .>     | /?     |
  * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
- * | LCTRL  | LGUI   | LALT   | FN     | SPACE           | LEFT   | DOWN   | RIGHT  | ENTER           | ALT+GR | CAPS   | LEFT   | RIGHT  |
+ * | LCTRL  | LGUI   | LALT   | FN     | SPACE           | LEFT   | DOWN   | RIGHT  | ENTER           | ALT+GR | CAPS   | RSHIFT | RCTRL  |
  * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
 
  [LAYER_QWERTY] = { /* QWERTY */
   { KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_EQL,  KC_NUHS, KC_MINS, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL   },
   { KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC, KC_PGUP, KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC  },
-  { KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    M_SNIP,  KC_PGDN, M_DIGITS,KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT  },
+  { KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    M_HELP,  KC_PGDN, M_DIGITS,KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT  },
   { KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_HOME, KC_UP,   KC_END,  KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH  },
-  { KC_LCTL, KC_LGUI, KC_LALT, FN,      KC_SPC,  xxxxxxx, KC_LEFT, KC_DOWN, KC_RGHT, ACCENTS, xxxxxxx, KC_RALT, KC_CAPS, KC_LEFT, KC_RGHT  },
+  { KC_LCTL, KC_LGUI, KC_LALT, FN,      KC_SPC,  xxxxxxx, KC_LEFT, KC_DOWN, KC_RGHT, ACCENTS, xxxxxxx, KC_RALT, SFT_CAPS,KC_RSFT, KC_RCTL  },
  },
 
  [LAYER_COLEMAK] = {
@@ -138,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   { M_GRAVE3,KC_MUTE, KC_VOLD, KC_VOLU, RGB_HUD, RGB_HUI, KC_P7,   KC_P8,   KC_P9,   KC_MINS, COLEMAK, QWERTY,  TESTER,  KC_INS,  KC_F12   },
   { KC_DEL,  KC_MPLY, KC_MPRV, KC_MNXT, RGB_SAD, RGB_SAI, KC_P4,   KC_P5,   KC_P6,   KC_PLUS, RESET,   KC_PSCR, KC_SLCK, KC_PAUSE,xxxxxxx  },
   { _______, RGB_TOG, RGB_MOD, RGB_RMOD,RGB_VAD, RGB_VAI, KC_P1,   KC_P2,   KC_P3,   KC_PENT, KC_APP,  KC_PGUP, KC_HOME, KC_UP,   KC_END   },
-  { _______, _______, _______, FN,      BL_STEP, xxxxxxx, KC_P0,   M_000,   KC_PDOT, _______, xxxxxxx, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT  },
+  { _______, _______, _______, FN,      BL_STEP, xxxxxxx, KC_P0,   M_000,   KC_PDOT, KC_ENT,  xxxxxxx, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT  },
  },
 
  [LAYER_TESTER] = {
@@ -302,6 +305,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			break;
 		case M_SNIP:
 			SEND_STRING("[...]");
+			return false;
+			break;
+		case M_HELP:
+			SEND_STRING("--help");
 			return false;
 			break;
 		case M_DIGITS:

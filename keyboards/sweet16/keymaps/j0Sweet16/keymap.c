@@ -172,8 +172,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			return false;
 			break;
 		case M_TCPDUMP:
-			//SEND_STRING("-o - | tcpdump-uw -enr - ");
-			SEND_STRING(SS_DOWN(X_LCTRL) SS_TAP(X_F4) SS_UP(X_LCTRL));
+			SEND_STRING("-o - | tcpdump-uw -enr - ");
+			//SEND_STRING(SS_DOWN(X_LCTRL) SS_TAP(X_F4) SS_UP(X_LCTRL));
 			return false;
 			break;
 		case M_WMP:
