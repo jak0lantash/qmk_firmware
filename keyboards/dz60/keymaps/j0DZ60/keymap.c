@@ -6,6 +6,9 @@
 #ifndef ____
 #define ____ KC_TRNS
 #endif
+#ifndef ______
+#define ______ KC_TRNS
+#endif
 
 #define LAYER_QWERTY 0
 #define LAYER_COLEMAK 1
@@ -41,12 +44,15 @@ enum custom_keycodes {
 	M_YUML,
 	M_UCIRC,
 	M_UGRAV,
+	M_UACCU,
 	M_UUML,
 	M_ICIRC,
 	M_IUML,
+	M_IACCU,
 	M_OCIRC,
 	M_OUML,
 	M_OELIG,
+	M_OACCU,
 	M_EURO
 };
 
@@ -66,11 +72,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, FN, LSFT_T(KC_ENT), KC_RALT, KC_RGUI, KC_APP, KC_RCTL
 	),
 	[LAYER_ACCENTS] = LAYOUT_JK0(
-		M_GRAVE, ____, ____, M_EURO, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
-		M_GRAVE3, M_ACIRC, M_EGRAV, M_EACCU, M_ECIRC, ____, M_YUML, M_UCIRC, M_ICIRC, M_OCIRC, M_OELIG, ____, ____, ____,
-		____, M_AGRAV, M_AUML, M_EUML, ____, ____, M_UGRAV, M_UUML, M_IUML, M_OUML, ____, ____, ____,
-		____, M_AACCU, ____, M_AELIG, M_CCEDL, ____, ____, ____, ____, ____, ____, ____, ____, ____,
-		____, ____, ____, ____, ____, ____, ____, ____, ____, ____
+		M_GRAVE,  _______, _______, M_ECIRC, M_EURO , _______, _______, M_UCIRC, M_ICIRC, M_OCIRC, _______, _______, _______, _______, _______,
+		M_GRAVE3,    M_ACIRC, M_EUML , M_EACCU, _______, _______, M_YUML , M_UACCU, M_IACCU, M_OACCU, M_OELIG, _______, _______, _______,
+		_______,       M_AACCU, M_AUML , M_EGRAV, _______, _______, M_UUML , M_UGRAV, M_IUML , M_OUML , _______, _______, _______,
+		_______, _______, M_AGRAV, M_AELIG, M_CCEDL, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+		_______, _______,  _______, _______, _______, _______, _______, _______, _______, _______
 	),
 	[LAYER_FN] = LAYOUT_JK0(
 		M_GRAVE, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_DEL, xxxx,
@@ -234,6 +240,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			break;
 		case M_OELIG: 
 			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_5) SS_TAP(X_KP_6) SS_UP(X_LALT));
+			return false;
+			break;
+		case M_UACCU:
+			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_2) SS_TAP(X_KP_5) SS_TAP(X_KP_0) SS_UP(X_LALT));
+			return false;
+			break;
+		case M_IACCU:
+			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_2) SS_TAP(X_KP_3) SS_TAP(X_KP_7) SS_UP(X_LALT));
+			return false;
+			break;
+		case M_OACCU:
+			SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_0) SS_TAP(X_KP_2) SS_TAP(X_KP_4) SS_TAP(X_KP_3) SS_UP(X_LALT));
 			return false;
 			break;
 		case M_EURO: 

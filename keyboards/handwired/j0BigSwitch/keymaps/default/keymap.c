@@ -9,6 +9,7 @@ enum {
 
 #ifdef AUDIO_ENABLE
 	float sound1[][2] = SONG(MARIO_MUSHROOM);
+	float sound2[][2] = SONG(DVORAK_SOUND);
 #endif
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -61,7 +62,17 @@ SS_TAP(X_ENTER)\
 			rgblight_sethsv (COLOR_ORANGE_HSV);
 			break;
 		case 2:
-			rgblight_step();
+			rgblight_setrgb (COLOR_GREEN_RGB);
+			PLAY_SONG(sound2);
+			SEND_STRING(
+"This case is now archived." SS_TAP(X_ENTER)\
+"Archived cases can be reopened within 7 days. If so, it will remain assigned to me so we can continue working on it together. Please also feel free to contact us again if you have any other query." SS_TAP(X_ENTER)\
+"It was a pleasure working with you on this case." SS_TAP(X_ENTER)\
+SS_TAP(X_ENTER)\
+"You may receive a Customer Satisfaction Survey. If you could find some time to fill it, I would greatly appreciate your feedback as it is very important to us to understand how our customers feel about the service we provide. Please note that I am personally evaluated on all the questions (including the 'Overall'). If you need to provide further feedback or about VMware globally, please use the comment section as our Management actively monitors its content."
+			);
+			PLAY_SONG(sound2);
+			rgblight_sethsv (COLOR_ORANGE_HSV);
 			break;
 		case 4:
 			reset_keyboard();
