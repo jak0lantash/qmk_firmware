@@ -131,6 +131,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 	switch (biton32(state)) {
 		case LAYER_QWERTY:
 			rgblight_sethsv (COLOR_ORANGE_HSV);
+			rgblight_setrgb (COLOR_ORANGE_RGB);
 			break;
 		case LAYER_COLEMAK:
 			rgblight_setrgb (COLOR_BLUE_RGB);
