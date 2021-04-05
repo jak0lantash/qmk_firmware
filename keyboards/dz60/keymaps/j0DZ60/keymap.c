@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define COLOR_BLUE_RGB 0x00, 0x00, 0xFF
 #define COLOR_CYAN_RGB 0x00, 0xF4, 0xFF
 #define COLOR_GREEN_RGB 0x40, 0xFF, 0x00
-#define COLOR_ORANGE_HSV 25, 255, 255
+#define COLOR_ORANGE_HSV 11, 255, 255
 #define COLOR_ORANGE_RGB 0xFF, 0x30, 0x00
 #define COLOR_PINK_RGB 0xFF, 0x00, 0xFF
 #define COLOR_PURPLE_RGB 0xFF, 0x00, 0x80
@@ -125,12 +125,13 @@ void matrix_init_user(void) {
 	//rgblight_init();
 	rgblight_enable();
 	rgblight_sethsv (COLOR_ORANGE_HSV);
+	rgblight_setrgb (COLOR_ORANGE_RGB);
 }
 
 uint32_t layer_state_set_user(uint32_t state) {
 	switch (biton32(state)) {
 		case LAYER_QWERTY:
-			rgblight_sethsv (COLOR_ORANGE_HSV);
+			//rgblight_sethsv (COLOR_ORANGE_HSV);
 			rgblight_setrgb (COLOR_ORANGE_RGB);
 			break;
 		case LAYER_COLEMAK:
